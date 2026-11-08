@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EduGestão × Bootstrap 5 — Apresentação</title>
+<meta name="description" content="Apresentação do projeto EduGestão com Bootstrap 5 — disciplina de Front-End Frameworks." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   EduGestão — deck de apresentação
+   Mesma identidade do app: lilás #7764df, Manrope + DM Sans.
+   ============================================================ */
+:root {
+  --ink: #202033;
+  --ink-2: #3b3b52;
+  --muted: #74748a;
+  --line: #e6e4f0;
+  --bg: #f6f5fb;
+  --surface: #ffffff;
+  --purple: #6a56d6;
+  --purple-2: #7764df;
+  --purple-soft: #f0edff;
+  --gold: #e2a45c;
+  --green: #3f9d76;
+  --green-soft: #e8f7ef;
+  --red: #c2605a;
+  --red-soft: #fcebea;
+
+  --title-size: clamp(2rem, 4.3vw, 4rem);
+  --h2-size: clamp(1.25rem, 2.4vw, 2rem);
+  --h3-size: clamp(0.95rem, 1.4vw, 1.2rem);
+  --body-size: clamp(0.84rem, 1.02vw, 0.98rem);
+  --small-size: clamp(0.72rem, 0.86vw, 0.82rem);
+  --micro-size: clamp(0.66rem, 0.74vw, 0.72rem);
+
+  --pad-x: clamp(1.2rem, 4.4vw, 4.5rem);
+  --gap: clamp(0.6rem, 1.4vw, 1.3rem);
+
+  --font-head: 'Manrope', 'DM Sans', sans-serif;
+  --font-body: 'DM Sans', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', Consolas, monospace;
+
+  --shadow-sm: 0 1px 2px #2020330a;
+  --shadow-md: 0 14px 40px #2a24500f;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(60rem 40rem at 88% -10%, #7764df12, transparent 60%),
+    radial-gradient(50rem 30rem at -10% 110%, #e2a45c0f, transparent 60%),
+    var(--bg);
+}
+
+/* ---------------------------------------------------------- slides */
+.slide {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(4.2rem, 8vh, 5.6rem) var(--pad-x) clamp(2.6rem, 5.5vh, 3.6rem);
+}
+
+.slide-content {
+  width: min(1240px, 100%);
+  max-height: 100%;
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(0.8rem, 2.2vh, 1.6rem);
+  min-height: 0;
+}
+
+.slide--cover { justify-content: center; }
+.slide--cover .slide-content { justify-content: center; }
+
+/* ---------------------------------------------------------- top bar */
+.topbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 var(--pad-x);
+  height: clamp(3.1rem, 6.4vh, 4.1rem);
+  background: linear-gradient(to bottom, #f6f5fbf2 55%, #f6f5fb00);
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-family: var(--font-head);
+  font-size: clamp(.95rem, 1.15vw, 1.1rem);
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  text-decoration: none;
+  pointer-events: auto;
+}
+.brand b { color: var(--purple); font-weight: 800; }
+.brand__mark {
+  display: grid;
+  place-items: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: .6rem;
+  background: var(--purple-2);
+  box-shadow: 0 .35rem .9rem #7764df38;
+}
+.brand__mark svg { width: 1.05rem; height: 1.05rem; }
+
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: clamp(.7rem, 1.6vw, 1.4rem);
+  font-family: var(--font-mono);
+  font-size: var(--micro-size);
+  letter-spacing: .14em;
+  color: #9a99ae;
+  text-transform: uppercase;
+}
+.topbar__right .tag { display: inline-flex; align-items: center; gap: .45rem; }
+.topbar__right .tag::before {
+  content: '';
+  width: .38rem; height: .38rem;
+  border-radius: 50%;
+  background: var(--purple);
+}
+#counter { color: var(--ink-2); font-weight: 600; letter-spacing: .1em; }
+
+/* ---------------------------------------------------------- chrome */
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin: 0;
+  color: var(--purple);
+  font-family: var(--font-mono);
+  font-size: var(--micro-size);
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.kicker::before {
+  content: '';
+  width: 1.5rem; height: 1px;
+  background: currentColor;
+  opacity: .5;
+}
+
+h1, h2, h3, p { margin: 0; }
+
+h1, .display {
+  font-family: var(--font-head);
+  font-size: var(--title-size);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  line-height: 1.02;
+}
+
+.headline {
+  font-family: var(--font-head);
+  font-size: var(--h2-size);
+  font-weight: 800;
+  letter-spacing: -.035em;
+  line-height: 1.08;
+}
+
+.lead {
+  color: var(--muted);
+  font-size: var(--body-size);
+  line-height: 1.55;
+  max-width: 62ch;
+}
+
+.hl {
+  background: linear-gradient(transparent 62%, #c9bffa 62%);
+  padding: 0 .08em;
+}
+.hl--gold { background: linear-gradient(transparent 62%, #f3d9b6 62%); }
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: .92em;
+  letter-spacing: -.01em;
+}
+
+.slide__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.4rem;
+  padding-bottom: clamp(.5rem, 1.2vh, .9rem);
+  border-bottom: 1px solid var(--line);
+}
+.slide__head .headline { max-width: 24ch; }
+.slide__head .head-note {
+  max-width: 34ch;
+  color: var(--muted);
+  font-size: var(--small-size);
+  line-height: 1.5;
+  text-align: right;
+}
+
+/* ---------------------------------------------------------- cover */
+.cover-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, .8fr);
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+}
+.cover h1 {
+  font-size: clamp(3rem, 8.2vw, 7.4rem);
+  letter-spacing: -.06em;
+  line-height: .92;
+}
+.cover h1 span { color: var(--purple); }
+.cover .lead { margin-top: clamp(.9rem, 2.2vh, 1.5rem); max-width: 46ch; }
+
+.cover__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem .55rem;
+  margin-top: clamp(1.1rem, 2.6vh, 1.9rem);
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .42rem .7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #ffffffb8;
+  color: var(--ink-2);
+  font-size: var(--micro-size);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.chip i {
+  width: .34rem; height: .34rem;
+  border-radius: 50%;
+  background: var(--purple);
+  flex: 0 0 auto;
+}
+.chip--gold i { background: var(--gold); }
+.chip--green i { background: var(--green); }
+
+.cover__side {
+  position: relative;
+  display: grid;
+  gap: .8rem;
+  padding: clamp(1rem, 2.4vw, 1.6rem);
+  border: 1px solid var(--line);
+  border-radius: 1.3rem;
+  background: #ffffffcc;
+  box-shadow: var(--shadow-md);
+}
+.cover__side::before {
+  content: '';
+  position: absolute;
+  inset: -.9rem -.9rem auto auto;
+  width: 5.5rem; height: 5.5rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #a89ceb, #6a56d6 70%);
+  opacity: .18;
+  filter: blur(2px);
+}
+.cover__side .side-label {
+  font-family: var(--font-mono);
+  font-size: var(--micro-size);
+  letter-spacing: .16em;
+  color: #9a99ae;
+  text-transform: uppercase;
+}
+.cover__side .side-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.05rem, 1.55vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: -.03em;
+}
+.cover__side ul {
+  display: grid;
+  gap: .55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cover__side li {
+  display: flex;
+  gap: .6rem;
+  color: var(--muted);
+  font-size: var(--small-size);
+  line-height: 1.4;
+}
+.cover__side li b { color: var(--ink); font-weight: 600; }
+.cover__side li span.n {
+  flex: 0 0 auto;
+  color: var(--purple);
+  font-family: var(--font-mono);
+  font-size: var(--micro-size);
+  font-weight: 600;
+  padding-top: .1rem;
+}
+.cover__side .side-foot {
+  padding-top: .7rem;
+  border-top: 1px solid var(--line);
+  color: #9a99ae;
+  font-size: var(--micro-size);
+  line-height: 1.45;
+}
+
+/* ---------------------------------------------------------- slide 1 */
+.s1-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
+  gap: clamp(1.2rem, 3vw, 2.6rem);
+  align-items: stretch;
+}
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 1.15rem;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(.9rem, 1.7vw, 1.35rem);
+}
+.panel--soft { background: #fbfaff; }
+.panel__label {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: .65rem;
+  color: #9a99ae;
+  font-family: var(--font-mono);
+  font-size: var(--micro-size);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.panel__label::before {
+  content: '';
+  width: .3rem; height: .3rem;
+  border-radius: 50%;
+  background: var(--purple);
+}
+.panel h3 {
+  font-family: var(--font-head);
+  font-size: var(--h3-size);
+  font-weight: 800;
+  letter-spacing: -.025em;
+  line-height: 1.2;
+}
+.panel p {
+  margin-top: .45rem;
+  color: var(--muted);
+  font-size: var(--small-size);
+  line-height: 1.5;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .5rem;
+  margin-top: .9rem;
+}
+.stat {
+  padding: .55rem .6rem;
+  border: 1px solid #eeecf9;
+  border-radius: .7rem;
+  background: #faf9ff;
+}
+.stat b {
+  display: block;
+  font-family: var(--font-head);
+  font-size: clamp(1rem, 1.7vw, 1.45rem);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  color: var(--ink);
+}
+.stat span { color: #9696a6; font-size: var(--micro-size); }
+
+.fw-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #e2ddfb;
+  border-radius: 1.15rem;
+  background:
+    radial-gradient(28rem 16rem at 110% -20%, #7764df1c, transparent 65%),
+    #fbfaff;
+  padding: clamp(.95rem, 1.8vw, 1.4rem);
+}
+.fw-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+}
+.fw-badge {
+  display: grid;
+  place-items: center;
+  width: clamp(2.2rem, 3.4vw, 2.9rem);
+  height: clamp(2.2rem, 3.4vw, 2.9rem);
+  border-radius: .8rem;
+  background: #6a56d6;
+  box-shadow: 0 .5rem 1.2rem #6a56d63a;
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-weight: 800;
+}
+.fw-version {
+  font-family: var(--font-mono);
+  font-size: var(--micro-size);
+  letter-spacing: .1em;
+  color: #8b8aa0;
+}
+.fw-card h3 {
+  margin-top: .75rem;
+  font-family: var(--font-head);
+  font-size: clamp(1.15rem, 1.9vw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: -.035em;
+}
+.fw-card > p {
+  margin-top: .35rem;
+  color: var(--muted);
+  font-size: var(--small-size);
+  line-height: 1.45;
+}
+.reasons {
+  display: grid;
+  gap: .45rem;
+  margin: .85rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.reasons li {
+  display: flex;
+  gap: .6rem;
+  padding: .5rem .55rem;
+  border: 1px solid #ece8fb;
+  border-radius: .65rem;
+  background: #ffffffb0;
+  font-size: var(--small-size);
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+.reasons .n {
+  flex: 0 0 auto;
+  color: var(--purple);
+  font-family: var(--font-mono);
+  font-size: var(--micro-size);
+  font-weight: 600;
+}
+.reasons b { color: var(--ink); }
+.fw-foot {
+  margin-top: auto;
+  padding-top: .65rem;
+  color: #8b8aa0;
+  font-size: var(--micro-size);
+  line-height: 1.45;
+}
+
+/* ---------------------------------------------------------- slide 2 */
+.s2-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr);
+  gap: clamp(1rem, 2.4vw, 2rem);
+  align-items: stretch;
+}
+.code-panel {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+.code-block {
+  overflow: hidden;
+  border: 1px solid #2f2d45;
+  border-radius: .85rem;
+  background: #201f31;
+  box-shadow: 0 12px 30px #201f311f;
+}
+.code-block__bar {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .5rem .7rem;
+  border-bottom: 1px solid #ffffff10;
+  background: #262538;
+}
+.code-block__bar i {
+  width: .42rem; height: .42rem;
+  border-radius: 50%;
+  background: #ffffff22;
+}
+.code-block__bar i:nth-child(1) { background: #e07a72; }
+.code-block__bar i:nth-child(2) { background: #e0b35f; }
+.code-block__bar i:nth-child(3) { background: #68b98d; }
+.code-block__bar span {
+  margin-left: auto;
+  color: #8f8da8;
+  font-family: var(--font-mono);
+  font-size: var(--micro-size);
+}
+.code-block pre {
+  margin: 0;
+  padding: .7rem .85rem;
+  overflow: auto;
+  color: #dcd9f2;
+  font-family: var(--font-mono);
+  font-size: clamp(.62rem, .78vw, .76rem);
+  line-height: 1.65;
+  tab-size: 2;
+}
+.tok-c { color: #7f7c9e; }
+.tok-k { color: #b9a6ff; }
+.tok-s { color: #a8d8b9; }
+.tok-p { color: #e7c07f; }
+
+.integration-note {
+  display: flex;
+  gap: .6rem;
+  padding: .7rem .75rem;
+  border: 1px solid #ece8fb;
+  border-radius: .75rem;
+  background: #fbfaff;
+  color: var(--muted);
+  font-size: var(--micro-size);
+  line-height: 1.5;
+}
+.integration-note b { color: var(--ink); font-weight: 600; }
+.integration-note .ico {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 1.35rem; height: 1.35rem;
+  border-radius: .45rem;
+  background: var(--purple-soft);
+  color: var(--purple);
+  font-size: .72rem;
+  font-weight: 800;
+}
+
+.class-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .55rem;
+}
+.class-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  padding: .62rem .7rem;
+  border: 1px solid var(--line);
+  border-radius: .75rem;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.class-card:hover {
+  border-color: #cfc6f6;
+  box-shadow: 0 8px 22px #2a245010;
+  transform: translateY(-1px);
+}
+.class-card code {
+  align-self: flex-start;
+  padding: .18rem .38rem;
+  border-radius: .35rem;
+  background: var(--purple-soft);
+  color: #5c49c8;
+  font-family: var(--font-mono);
+  font-size: clamp(.62rem, .72vw, .72rem);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.class-card b {
+  font-size: var(--small-size);
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -.01em;
+}
+.class-card p {
+  color: var(--muted);
+  font-size: var(--micro-size);
+  line-height: 1.42;
+}
+.class-card .demo {
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  margin-top: auto;
+  padding-top: .3rem;
+}
+.class-card .demo i {
+  display: block;
+  height: .32rem;
+  border-radius: 999px;
+  background: #ded8fa;
+}
+.class-card .demo i:nth-child(1) { width: 32%; background: var(--purple-2); }
+.class-card .demo i:nth-child(2) { width: 20%; }
+.class-card .demo i:nth-child(3) { width: 12%; }
+.class-card .demo em {
+  margin-left: auto;
+  font-style: normal;
+  color: #a3a2b4;
+  font-family: var(--font-mono);
+  font-size: .64rem;
+  letter-spacing: .06em;
+}
+
+/* ---------------------------------------------------------- slide 3 */
+.s3 { display: flex; flex-direction: column; gap: clamp(.6rem, 1.4vh, 1rem); min-height: 0; }
+.ba-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(.6rem, 1.4vw, 1rem);
+}
+.shot {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.shot__tag {
+  position: absolute;
+  top: .55rem; left: .55rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  background: #ffffffeb;
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: var(--micro-size);
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px #20203312;
+}
+.shot__tag::before {
+  content: '';
+  width: .32rem; height: .32rem;
+  border-radius: 50%;
+  background: #a3a2b4;
+}
+.shot--after .shot__tag { background: #6a56d6f2; color: #fff; }
+.shot--after .shot__tag::before { background: #d8d0ff; }
+.shot img {
+  display: block;
+  width: 100%;
+  height: clamp(11rem, 31vh, 20rem);
+  object-fit: cover;
+  object-position: top left;
+  filter: saturate(.96);
+}
+.shot--before img { filter: saturate(.7) contrast(.97); }
+.shot__caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .2rem .8rem;
+  padding: .45rem .65rem .5rem;
+  border-top: 1px solid #f0eef8;
+  color: var(--muted);
+  font-size: var(--micro-size);
+  line-height: 1.35;
+}
+.shot__caption > span { min-width: 0; }
+.shot__caption b { color: var(--ink); font-weight: 600; }
+.shot__caption > span:last-child { color: #a3a2b4; font-family: var(--font-mono); font-size: .62rem; white-space: nowrap; }
+
+.s3-bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: clamp(.8rem, 2vw, 1.4rem);
+  align-items: stretch;
+}
+.mudancas h3, .responsivo h3 {
+  font-family: var(--font-mono);
+  font-size: var(--micro-size);
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #9a99ae;
+}
+.mudancas ol {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .45rem;
+  margin: .45rem 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: item;
+}
+.mudancas li {
+  position: relative;
+  padding: .5rem .55rem .5rem 1.75rem;
+  border: 1px solid var(--line);
+  border-radius: .65rem;
+  background: #fff;
+  font-size: var(--micro-size);
+  line-height: 1.4;
+}
+.mudancas li::before {
+  counter-increment: item;
+  content: '0' counter(item);
+  position: absolute;
+  top: .5rem; left: .55rem;
+  color: var(--purple);
+  font-family: var(--font-mono);
+  font-size: .56rem;
+  font-weight: 600;
+}
+.mudancas li b { display: block; color: var(--ink); font-size: var(--small-size); font-weight: 700; margin-bottom: .1rem; }
+.mudancas li span { color: var(--muted); }
+
+.responsivo { display: flex; flex-direction: column; }
+.bp-list { display: grid; gap: .3rem; margin-top: .45rem; }
+.bp {
+  display: flex;
+  align-items: baseline;
+  gap: .55rem;
+  padding: .34rem .5rem;
+  border: 1px solid var(--line);
+  border-radius: .5rem;
+  background: #fff;
+  color: var(--muted);
+  font-size: var(--micro-size);
+  line-height: 1.35;
+}
+.bp b {
+  flex: 0 0 auto;
+  min-width: 4.2rem;
+  color: var(--purple);
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  font-weight: 600;
+}
+.bp--ok { border-color: #d9f0e4; background: var(--green-soft); }
+.bp--ok b { color: var(--green); }
+
+/* ---------------------------------------------------------- slide 4 */
+.s4-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+  gap: clamp(1rem, 2.6vw, 2rem);
+  align-items: stretch;
+}
+.demo-col { display: flex; flex-direction: column; gap: .6rem; min-width: 0; }
+.demo-steps {
+  display: grid;
+  gap: .34rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+.demo-steps li {
+  display: flex;
+  gap: .5rem;
+  align-items: baseline;
+  padding: .34rem .45rem;
+  border-bottom: 1px dashed #e9e6f4;
+  color: var(--muted);
+  font-size: var(--micro-size);
+  line-height: 1.4;
+}
+.demo-steps li:last-child { border-bottom: 0; }
+.demo-steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 1rem; height: 1rem;
+  border-radius: 50%;
+  background: var(--purple-soft);
+  color: var(--purple);
+  font-family: var(--font-mono);
+  font-size: .54rem;
+  font-weight: 600;
+}
+.demo-steps b { color: var(--ink); font-weight: 600; }
+
+.phone-wrap {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .55rem .6rem;
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+  background: #fff;
+}
+.phone {
+  flex: 0 0 auto;
+  width: clamp(4.6rem, 7vw, 6.4rem);
+  padding: .22rem;
+  border: 1px solid #d9d5e8;
+  border-radius: .85rem;
+  background: #f2f0fa;
+  box-shadow: 0 8px 20px #2a245012;
+}
+.phone img {
+  display: block;
+  width: 100%;
+  border-radius: .65rem;
+}
+.phone-wrap p {
+  color: var(--muted);
+  font-size: var(--micro-size);
+  line-height: 1.45;
+}
+.phone-wrap p b { display: block; margin-bottom: .15rem; color: var(--ink); font-size: var(--small-size); }
+
+.conclusions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .55rem;
+}
+.conclusion {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  padding: .65rem .7rem;
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.conclusion h3 {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: var(--font-head);
+  font-size: var(--small-size);
+  font-weight: 800;
+  letter-spacing: -.015em;
+}
+.conclusion h3 .dot {
+  width: .45rem; height: .45rem;
+  border-radius: 50%;
+  background: var(--purple);
+}
+.conclusion--good h3 .dot { background: var(--green); }
+.conclusion--hard h3 .dot { background: var(--gold); }
+.conclusion--learn h3 .dot { background: var(--purple); }
+.conclusion--next h3 .dot { background: #9a99ae; }
+.conclusion ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: .22rem;
+}
+.conclusion li {
+  position: relative;
+  padding-left: .7rem;
+  color: var(--muted);
+  font-size: var(--micro-size);
+  line-height: 1.42;
+}
+.conclusion li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: .42em;
+  width: .26rem; height: .26rem;
+  border-radius: 50%;
+  background: #cfc9e6;
+}
+.conclusion li b { color: var(--ink-2); font-weight: 600; }
+
+.links-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .45rem;
+  padding: .45rem .55rem;
+  border: 1px solid #e2ddfb;
+  border-radius: .7rem;
+  background: #fbfaff;
+  font-size: var(--micro-size);
+}
+.links-bar .lbl {
+  margin-right: .2rem;
+  color: #9a99ae;
+  font-family: var(--font-mono);
+  font-size: .64rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.link-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #e6e1f8;
+  color: var(--purple);
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.link-pill:hover { background: var(--purple-soft); }
+.link-pill .arr { font-size: .62rem; }
+
+/* ---------------------------------------------------------- closing */
+.slide--closing {
+  background:
+    radial-gradient(42rem 30rem at 80% 10%, #7764df33, transparent 62%),
+    radial-gradient(30rem 20rem at 5% 95%, #e2a45c14, transparent 60%),
+    #1d1c2e;
+  color: #f5f4fb;
+}
+.slide--closing .topbar {
+  background: linear-gradient(to bottom, #1d1c2eee 55%, #1d1c2e00);
+}
+.slide--closing .brand { color: #f5f4fb; }
+.slide--closing .brand b { color: #b9a6ff; }
+.slide--closing .topbar__right { color: #8b88a8; }
+.slide--closing #counter { color: #dcd9f2; }
+.slide--closing .kicker { color: #b9a6ff; }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: center;
+}
+.slide--closing h2 {
+  font-family: var(--font-head);
+  font-size: clamp(2.6rem, 7vw, 6rem);
+  font-weight: 800;
+  letter-spacing: -.06em;
+  line-height: .95;
+}
+.slide--closing h2 span { color: #b9a6ff; }
+.slide--closing .lead { color: #a7a4c0; margin-top: 1rem; }
+.closing-side {
+  display: grid;
+  gap: .5rem;
+  padding: 1rem 1.05rem;
+  border: 1px solid #ffffff1a;
+  border-radius: 1rem;
+  background: #ffffff08;
+}
+.closing-side .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  padding: .42rem 0;
+  border-bottom: 1px solid #ffffff0f;
+  font-size: var(--micro-size);
+  color: #a7a4c0;
+}
+.closing-side .row:last-child { border-bottom: 0; }
+.closing-side .row b { color: #e7e4f7; font-weight: 600; }
+.closing-side .row a { color: #b9a6ff; text-decoration: none; font-family: var(--font-mono); font-size: .6rem; }
+.closing-side .row a:hover { text-decoration: underline; }
+.closing-note { color: #77748f; font-size: var(--micro-size); line-height: 1.5; }
+
+/* ---------------------------------------------------------- nav */
+.dots {
+  position: fixed;
+  right: clamp(.6rem, 1.4vw, 1.2rem);
+  top: 50%;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  transform: translateY(-50%);
+}
+.dots button {
+  width: .42rem;
+  height: .42rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #bdb8d2;
+  opacity: .55;
+  cursor: pointer;
+  transition: opacity .2s ease, transform .2s ease, background .2s ease;
+}
+.dots button:hover { opacity: 1; }
+.dots button[aria-current="true"] {
+  background: var(--purple);
+  opacity: 1;
+  transform: scale(1.5);
+}
+
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 2px;
+  background: #7764df14;
+}
+.progress i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #7764df, #a89ceb);
+  transition: width .15s linear;
+}
+
+.navbtn {
+  position: fixed;
+  right: clamp(.55rem, 1.2vw, 1rem);
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  border: 1px solid #e2ddf2;
+  border-radius: 50%;
+  background: #ffffffe6;
+  color: var(--ink-2);
+  font-size: .8rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .25s ease, background .2s ease;
+  backdrop-filter: blur(4px);
+}
+.navbtn:hover { background: #fff; color: var(--purple); }
+.navbtn--prev { bottom: 3.6rem; }
+.navbtn--next { bottom: 1.4rem; }
+.navbtn:focus-visible, .dots button:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
+body:hover .navbtn, .navbtn:focus-visible { opacity: 1; }
+
+.hint {
+  position: fixed;
+  left: var(--pad-x);
+  bottom: 1.3rem;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  color: #a3a2b4;
+  font-family: var(--font-mono);
+  font-size: .54rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+.hint kbd {
+  padding: .12rem .3rem;
+  border: 1px solid #ddd9ea;
+  border-radius: .25rem;
+  background: #fff;
+  font-family: inherit;
+  font-size: .54rem;
+  color: #77748f;
+}
+
+/* ---------------------------------------------------------- reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1);
+  transition-delay: var(--d, 0s);
+}
+.slide.is-visible .reveal { opacity: 1; transform: none; }
+
+/* ---------------------------------------------------------- responsive */
+@media (max-height: 760px) {
+  :root {
+    --title-size: clamp(1.7rem, 3.7vw, 3rem);
+    --h2-size: clamp(1.15rem, 2vw, 1.55rem);
+    --body-size: clamp(.8rem, .92vw, .9rem);
+    --small-size: clamp(.68rem, .78vw, .76rem);
+    --micro-size: clamp(.64rem, .7vw, .68rem);
+  }
+  .slide { padding-top: clamp(3.5rem, 6.6vh, 4.4rem); padding-bottom: 2.2rem; }
+  .shot img { height: clamp(9rem, 28vh, 15rem); }
+  .cover h1 { font-size: clamp(2.6rem, 6.8vw, 5rem); }
+  .slide--closing h2 { font-size: clamp(2.2rem, 5.6vw, 4.4rem); }
+  .class-card p { line-height: 1.35; }
+}
+
+@media (max-height: 620px) {
+  .hint, .dots { display: none; }
+  .slide { padding-top: 3.2rem; padding-bottom: 1.4rem; }
+  .shot img { height: 26vh; }
+  .phone { width: 4rem; }
+  .cover__side { display: none; }
+  .cover-grid { grid-template-columns: 1fr; }
+  .cover h1 { font-size: clamp(2.4rem, 8vw, 4.6rem); }
+}
+
+@media (max-width: 900px) {
+  .cover-grid, .s1-grid, .s2-grid, .s3-bottom, .s4-grid, .closing-grid {
+    grid-template-columns: 1fr;
+  }
+  .cover__side { display: none; }
+  .s3 .ba-row { grid-template-columns: 1fr 1fr; }
+  .mudancas ol { grid-template-columns: 1fr; }
+  .conclusions { grid-template-columns: 1fr 1fr; }
+  .slide__head .head-note { display: none; }
+  .slide { overflow-y: auto; scroll-snap-align: start; }
+}
+
+@media (max-width: 640px) {
+  .topbar__right .tag { display: none; }
+  .ba-row { grid-template-columns: 1fr !important; }
+  .conclusions, .class-grid { grid-template-columns: 1fr; }
+  .shot img { height: 22vh; }
+  .shot__caption > span:last-child { display: none; }
+  .hint { display: none; }
+  .mudancas ol { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: 1fr 1fr 1fr; }
+  .slide { overflow-y: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ---------------------------------------------------------- print / PDF */
+@page { size: 13.333in 7.5in; margin: 0; }
+
+@media print {
+  html, body {
+    height: auto;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .topbar, .dots, .navbtn, .hint, .progress { display: none !important; }
+  .slide {
+    width: 13.333in;
+    height: 7.5in;
+    padding: .42in .55in;
+    page-break-after: always;
+    break-after: page;
+    overflow: hidden;
+    background: #f6f5fb !important;
+  }
+  .slide--closing { background: #1d1c2e !important; }
+  .slide-content { width: 100%; max-width: 100%; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .shot img { height: 2.35in; }
+  .cover h1 { font-size: 5.2rem; }
+  .slide--closing h2 { font-size: 4.2rem; }
+  .class-card, .conclusion, .panel, .fw-card, .code-block { box-shadow: none; }
+  .slide:last-child { page-break-after: auto; break-after: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+<header class="topbar">
+  <a class="brand" href="#capa" aria-label="EduGestão — início da apresentação">
+    <span class="brand__mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 8.5 12 4l10 4.5-10 4.5L2 8.5Z" />
+        <path d="M6 10.8V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.2" />
+      </svg>
+    </span>
+    <span>edu<b>gestão</b></span>
+  </a>
+  <div class="topbar__right">
+    <span class="tag">Front-End Frameworks</span>
+    <span id="counter">00 / 06</span>
+  </div>
+</header>
+
+<nav class="dots" id="dots" aria-label="Navegação dos slides"></nav>
+<button class="navbtn navbtn--prev" id="prev" type="button" aria-label="Slide anterior">↑</button>
+<button class="navbtn navbtn--next" id="next" type="button" aria-label="Próximo slide">↓</button>
+<div class="hint"><kbd>↑</kbd><kbd>↓</kbd> navegar · <kbd>F</kbd> tela cheia</div>
+
+<main id="deck">
+
+  <!-- ======================================================= CAPA -->
+  <section class="slide slide--cover" id="capa" data-label="Abertura">
+    <div class="slide-content cover">
+      <div class="cover-grid">
+        <div>
+          <p class="kicker reveal">2ª avaliação · apresentação</p>
+          <h1 class="reveal" style="--d:.06s">Edu<span>Gestão</span></h1>
+          <p class="lead reveal" style="--d:.12s">
+            Do CSS artesanal ao <b>Bootstrap 5</b>: como um framework CSS
+            deixou um painel escolar em Vue 3 mais consistente, responsivo
+            e fácil de manter — sem refazer o projeto.
+          </p>
+          <div class="cover__meta reveal" style="--d:.18s">
+            <span class="chip"><i></i>Vue 3 + Vite</span>
+            <span class="chip"><i></i>Bootstrap 5.3.8</span>
+            <span class="chip chip--gold"><i></i>Bootstrap Icons</span>
+            <span class="chip chip--green"><i></i>35/35 verificações</span>
+          </div>
+        </div>
+
+        <aside class="cover__side reveal" style="--d:.24s" aria-label="Resumo da apresentação">
+          <span class="side-label">Nesta apresentação</span>
+          <strong class="side-title">4 slides, 5 minutos</strong>
+          <ul>
+            <li><span class="n">01</span><span><b>Projeto e framework</b> — o EduGestão e por que Bootstrap.</span></li>
+            <li><span class="n">02</span><span><b>Integração</b> — npm e as classes que fazem o layout.</span></li>
+            <li><span class="n">03</span><span><b>Evolução visual</b> — antes, depois e responsividade.</span></li>
+            <li><span class="n">04</span><span><b>Demonstração</b> — vantagens, dificuldades e aprendizados.</span></li>
+          </ul>
+          <div class="side-foot">
+            <b>Integrantes:</b> Alexander Protasio<!-- EDITE AQUI: acrescente os demais integrantes do grupo --><br />
+            Front-End Frameworks · Novembro de 2026
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= SLIDE 1 -->
+  <section class="slide" id="slide-1" data-label="Projeto e framework">
+    <div class="slide-content">
+      <header class="slide__head reveal">
+        <div>
+          <p class="kicker">Slide 01 · Projeto e framework</p>
+          <h2 class="headline" style="margin-top:.5rem">Um painel escolar que precisava de <span class="hl">acabamento e escala</span>.</h2>
+        </div>
+        <p class="head-note">
+          A proposta, as telas e as regras de negócio da 1ª avaliação
+          continuam as mesmas. O que mudou foi a base visual.
+        </p>
+      </header>
+
+      <div class="s1-grid">
+        <div class="panel reveal" style="--d:.08s">
+          <span class="panel__label">O projeto</span>
+          <h3>EduGestão — gestão escolar em uma única tela</h3>
+          <p>
+            Painel para professores e coordenação acompanharem alunos, turmas,
+            notas e frequência. Os dados ficam no navegador e toda a interface
+            reage às mudanças de estado do Vue.
+          </p>
+          <div class="stat-row">
+            <div class="stat"><b>5</b><span>telas</span></div>
+            <div class="stat"><b>6</b><span>componentes Vue</span></div>
+            <div class="stat"><b>100%</b><span>localStorage</span></div>
+          </div>
+          <p style="margin-top:.8rem; color:#8b8aa0; font-size:var(--micro-size)">
+            <b style="color:var(--ink-2)">O que foi preservado:</b> CRUD de alunos,
+            cálculo de médias, chamada diária, busca por matrícula e persistência local.
+          </p>
+        </div>
+
+        <div class="fw-card reveal" style="--d:.16s">
+          <div class="fw-card__top">
+            <span class="fw-badge" aria-hidden="true">B</span>
+            <span class="fw-version">v5.3.8 · npm</span>
+          </div>
+          <h3>Bootstrap 5 + Bootstrap Icons</h3>
+          <p>Framework escolhido para dar base de componentes e responsividade sem apagar a identidade do EduGestão.</p>
+
+          <ul class="reasons">
+            <li><span class="n">01</span><span><b>Componentes prontos</b> que o projeto já precisava: card, tabela, modal, botão, formulário e badge.</span></li>
+            <li><span class="n">02</span><span><b>Grid e utilitários responsivos</b> resolvem desktop, tablet e celular com classes declarativas.</span></li>
+            <li><span class="n">03</span><span><b>Fácil de explicar e manter</b>: nomes legíveis, documentação madura e customização por variáveis CSS.</span></li>
+          </ul>
+
+          <p class="fw-foot">
+            Alternativas consideradas: <b>Tailwind</b> exigiria reescrever o CSS utilitário em todas as telas;
+            <b>Bulma</b> tem ecossistema menor de componentes prontos. Bootstrap ofereceu o melhor custo-benefício
+            para evoluir o que já existia.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= SLIDE 2 -->
+  <section class="slide" id="slide-2" data-label="Integração e classes">
+    <div class="slide-content">
+      <header class="slide__head reveal">
+        <div>
+          <p class="kicker">Slide 02 · Integração e implementação</p>
+          <h2 class="headline" style="margin-top:.5rem">Instalação via <span class="hl">npm</span> e classes que fazem o layout funcionar.</h2>
+        </div>
+        <p class="head-note">
+          O Bootstrap entra como dependência do projeto; o tema do EduGestão
+          é carregado depois e ajusta cores, fontes e espaçamentos.
+        </p>
+      </header>
+
+      <div class="s2-grid">
+        <div class="code-panel reveal" style="--d:.08s">
+          <div class="code-block">
+            <div class="code-block__bar"><i></i><i></i><i></i><span>terminal</span></div>
+            <pre><span class="tok-c"># dependências versionadas no package.json</span>
+<span class="tok-p">npm</span> install bootstrap bootstrap-icons</pre>
+          </div>
+
+          <div class="code-block">
+            <div class="code-block__bar"><i></i><i></i><i></i><span>src/main.js</span></div>
+            <pre><span class="tok-k">import</span> <span class="tok-s">'bootstrap/dist/css/bootstrap.min.css'</span>
+<span class="tok-k">import</span> <span class="tok-s">'bootstrap-icons/font/bootstrap-icons.css'</span>
+<span class="tok-k">import</span> <span class="tok-s">'./assets/main.css'</span> <span class="tok-c">// tema por último</span></pre>
+          </div>
+
+          <div class="integration-note">
+            <span class="ico">i</span>
+            <span>
+              <b>Por que npm e não CDN?</b> O Vite empacota, versiona e otimiza o CSS junto com o app.
+              A ordem de importação garante que o <b>main.css</b> sobrescreva o Bootstrap onde o projeto tem identidade própria.
+            </span>
+          </div>
+
+          <div class="integration-note">
+            <span class="ico" style="background:#fff4e3;color:#b98345">%</span>
+            <span>
+              <b>Customização por variáveis:</b> <span class="mono">--bs-primary</span>,
+              <span class="mono">--bs-body-font-family</span>, <span class="mono">--bs-btn-bg</span> e
+              <span class="mono">--bs-progress-bar-bg</span> mantêm a paleta lilás sem duplicar CSS.
+            </span>
+          </div>
+        </div>
+
+        <div class="class-grid reveal" style="--d:.16s">
+          <article class="class-card">
+            <code>offcanvas-lg</code>
+            <b>Menu lateral</b>
+            <p>Fixo no desktop; gaveta lateral abaixo de 992px. O estado <span class="mono">menuAberto</span> do Vue controla a classe <span class="mono">show</span>.</p>
+            <div class="demo"><i></i><i></i><i></i><em>responsivo</em></div>
+          </article>
+
+          <article class="class-card">
+            <code>row · col · row-cols-xl-4</code>
+            <b>Grid dos cards</b>
+            <p>2 cards por linha no celular e 4 no desktop, com <span class="mono">g-3</span> para espaçamento consistente.</p>
+            <div class="demo"><i></i><i></i><i></i><em>grid</em></div>
+          </article>
+
+          <article class="class-card">
+            <code>card · card-body · h-100</code>
+            <b>Cards de indicadores</b>
+            <p>Estrutura pronta de card e altura igual entre os itens da mesma linha.</p>
+            <div class="demo"><i></i><i></i><i></i><em>componente</em></div>
+          </article>
+
+          <article class="class-card">
+            <code>table-hover · table-responsive</code>
+            <b>Tabelas</b>
+            <p>Padrão visual, destaque na linha e rolagem horizontal no celular sem quebrar o layout.</p>
+            <div class="demo"><i></i><i></i><i></i><em>dados</em></div>
+          </article>
+
+          <article class="class-card">
+            <code>modal · form-control · is-invalid</code>
+            <b>Cadastro de aluno</b>
+            <p>Modal centralizado, campos padronizados e estado visual de erro na validação.</p>
+            <div class="demo"><i></i><i></i><i></i><em>formulário</em></div>
+          </article>
+
+          <article class="class-card">
+            <code>badge · rounded-pill · progress</code>
+            <b>Status e indicadores</b>
+            <p>Selos de situação e barras de progresso com largura calculada por <span class="mono">computed</span>.</p>
+            <div class="demo"><i></i><i></i><i></i><em>feedback</em></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= SLIDE 3 -->
+  <section class="slide" id="slide-3" data-label="Evolução visual">
+    <div class="slide-content">
+      <header class="slide__head reveal">
+        <div>
+          <p class="kicker">Slide 03 · Evolução visual</p>
+          <h2 class="headline" style="margin-top:.5rem">Antes e depois: <span class="hl">mesma função, outra presença</span>.</h2>
+        </div>
+        <p class="head-note">
+          Capturas reais da aplicação. A versão anterior foi preservada
+          em <span class="mono">docs/antes-*.png</span> para comparação.
+        </p>
+      </header>
+
+      <div class="s3">
+        <div class="ba-row">
+          <figure class="shot shot--before reveal" style="--d:.06s">
+            <span class="shot__tag">Antes · 1ª avaliação</span>
+            <img src="../docs/antes-visao-geral.png" alt="Visão geral do EduGestão antes do Bootstrap: cabeçalho escuro, cards com borda colorida e tabela densa." />
+            <figcaption class="shot__caption">
+              <span><b>CSS artesanal.</b> Cabeçalho escuro, cards com borda grossa e tabela compacta.</span>
+              <span>1440px</span>
+            </figcaption>
+          </figure>
+
+          <figure class="shot shot--after reveal" style="--d:.12s">
+            <span class="shot__tag">Depois · Bootstrap 5</span>
+            <img src="../docs/preview.png" alt="Visão geral do EduGestão depois do Bootstrap: menu lateral, cards com ícones e barras de progresso, tabela com badges." />
+            <figcaption class="shot__caption">
+              <span><b>Bootstrap + tema próprio.</b> Menu lateral, cards com ícones e progresso, badges de situação.</span>
+              <span>1440px</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="s3-bottom">
+          <div class="mudancas reveal" style="--d:.18s">
+            <h3>3 elementos visuais modificados</h3>
+            <ol>
+              <li><b>Cabeçalho e menu</b><span>Menu lateral fixo, busca, avatar e notificações; offcanvas no celular.</span></li>
+              <li><b>Cards e indicadores</b><span>Grid responsivo, ícones, barras de progresso e hover suave.</span></li>
+              <li><b>Tabelas, modal e rodapé</b><span>Hover, badges, modal validado e formulário padronizado.</span></li>
+            </ol>
+          </div>
+
+          <div class="responsivo reveal" style="--d:.24s">
+            <h3>Responsividade verificada</h3>
+            <div class="bp-list">
+              <div class="bp"><b>≥ 1200px</b><span>menu fixo · 4 cards por linha · painel em 2 colunas</span></div>
+              <div class="bp"><b>768–1199</b><span>2 cards por linha · painel empilhado · tabelas com scroll</span></div>
+              <div class="bp"><b>&lt; 768px</b><span>offcanvas · busca oculta · ações só com ícone</span></div>
+              <div class="bp bp--ok"><b>35/35 ✓</b><span>testes em 1440, 1200, 1024, 768, 576 e 390px</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= SLIDE 4 -->
+  <section class="slide" id="slide-4" data-label="Demonstração e conclusão">
+    <div class="slide-content">
+      <header class="slide__head reveal">
+        <div>
+          <p class="kicker">Slide 04 · Demonstração e conclusão</p>
+          <h2 class="headline" style="margin-top:.5rem">O framework acelera — <span class="hl">o entendimento continua sendo nosso</span>.</h2>
+        </div>
+        <p class="head-note">
+          Roteiro de 90 segundos para a demo ao vivo, seguido das
+          vantagens, dificuldades e aprendizados do grupo.
+        </p>
+      </header>
+
+      <div class="s4-grid">
+        <div class="demo-col reveal" style="--d:.08s">
+          <div class="phone-wrap">
+            <div class="phone">
+              <img src="../docs/mobile-menu.png" alt="Menu offcanvas aberto no celular" />
+            </div>
+            <p>
+              <b>Demo no celular</b>
+              Abra o menu, navegue e mostre a tabela rolando na horizontal.
+              É o mesmo componente Vue, só com o offcanvas do Bootstrap.
+            </p>
+          </div>
+
+          <ol class="demo-steps">
+            <li><span><b>Visão geral:</b> indicadores e médias calculados por <span class="mono">computed</span>.</span></li>
+            <li><span><b>Alunos:</b> busca por matrícula, cadastro no modal e validação.</span></li>
+            <li><span><b>Notas:</b> altere uma nota e veja a média e o badge mudarem.</span></li>
+            <li><span><b>Frequência:</b> registre presença e acompanhe o percentual.</span></li>
+            <li><span><b>Responsivo:</b> reduza a janela e abra o menu offcanvas.</span></li>
+          </ol>
+
+          <div class="links-bar">
+            <span class="lbl">Entregáveis</span>
+            <a class="link-pill" href="https://github.com/Rocksd2/EduGest-o" target="_blank" rel="noopener">
+              <span>github.com/Rocksd2/EduGest-o</span><span class="arr">↗</span>
+            </a>
+            <a class="link-pill" href="https://rocksd2.github.io/EduGest-o/" target="_blank" rel="noopener">
+              <span>rocksd2.github.io/EduGest-o</span><span class="arr">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="conclusions reveal" style="--d:.16s">
+          <article class="conclusion conclusion--good">
+            <h3><span class="dot"></span>Vantagens</h3>
+            <ul>
+              <li><b>Velocidade:</b> componentes prontos reduziram o CSS escrito à mão.</li>
+              <li><b>Consistência:</b> botões, campos e tabelas seguem o mesmo padrão.</li>
+              <li><b>Responsividade:</b> grid e utilitários resolveram os breakpoints.</li>
+            </ul>
+          </article>
+
+          <article class="conclusion conclusion--hard">
+            <h3><span class="dot"></span>Dificuldades</h3>
+            <ul>
+              <li><b>Peso inicial:</b> o CSS completo é grande; foi preciso carregar só o necessário.</li>
+              <li><b>Conflitos de estilo:</b> exigiu controlar a ordem de importação e a especificidade.</li>
+              <li><b>JS do Bootstrap:</b> optamos por controlar modal e menu pelo estado do Vue.</li>
+            </ul>
+          </article>
+
+          <article class="conclusion conclusion--learn">
+            <h3><span class="dot"></span>Aprendizados</h3>
+            <ul>
+              <li><b>Ler a documentação</b> vale mais que copiar classes soltas.</li>
+              <li><b>Framework não substitui CSS:</b> o tema próprio continua necessário.</li>
+              <li><b>Testar em larguras reais</b> revelou ajustes que o olho não via.</li>
+            </ul>
+          </article>
+
+          <article class="conclusion conclusion--next">
+            <h3><span class="dot"></span>Próximos passos</h3>
+            <ul>
+              <li>API com autenticação e banco de dados.</li>
+              <li>Boletim em PDF e relatório de faltas.</li>
+              <li>Testes unitários dos cálculos de média.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= ENCERRAMENTO -->
+  <section class="slide slide--closing" id="fim" data-label="Encerramento">
+    <div class="slide-content closing-grid">
+      <div>
+        <p class="kicker reveal">Obrigado</p>
+        <h2 class="reveal" style="--d:.06s">Perguntas<span>?</span></h2>
+        <p class="lead reveal" style="--d:.12s">
+          Projeto, código e capturas estão no repositório. A aplicação
+          está publicada no GitHub Pages e pode ser aberta no celular.
+        </p>
+      </div>
+
+      <div class="closing-side reveal" style="--d:.18s">
+        <div class="row"><span>Repositório</span><a href="https://github.com/Rocksd2/EduGest-o" target="_blank" rel="noopener">github.com/Rocksd2/EduGest-o ↗</a></div>
+        <div class="row"><span>Aplicação</span><a href="https://rocksd2.github.io/EduGest-o/" target="_blank" rel="noopener">rocksd2.github.io/EduGest-o ↗</a></div>
+        <div class="row"><span>Stack</span><b>Vue 3 · Vite · Bootstrap 5</b></div>
+        <div class="row"><span>Validação</span><b>35/35 verificações</b></div>
+        <p class="closing-note">
+          Apresentação de Front-End Frameworks · 2ª avaliação · novembro de 2026.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(() => {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dotsWrap = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+  const bar = document.getElementById('bar');
+  let atual = 0;
+
+  // Cria os indicadores de navegação
+  slides.forEach((slide, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', `Ir para o slide ${i + 1}: ${slide.dataset.label || ''}`);
+    b.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(b);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function go(i) {
+    const alvo = Math.max(0, Math.min(slides.length - 1, i));
+    slides[alvo].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    atual = alvo;
+    atualizar();
+  }
+
+  function atualizar() {
+    counter.textContent = `${String(atual + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+    dots.forEach((d, i) => d.setAttribute('aria-current', i === atual ? 'true' : 'false'));
+  }
+
+  // Progresso de leitura
+  function progresso() {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const p = total > 0 ? (window.scrollY / total) * 100 : 0;
+    bar.style.width = `${p}%`;
+  }
+
+  // Revela os elementos do slide visível
+  const obs = new IntersectionObserver((entradas) => {
+    entradas.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        const idx = slides.indexOf(e.target);
+        if (idx !== -1 && idx !== atual) {
+          atual = idx;
+          atualizar();
+        }
+      }
+    });
+  }, { threshold: 0.55 });
+  slides.forEach((s) => obs.observe(s));
+
+  // Navegação por teclado
+  window.addEventListener('keydown', (e) => {
+    const alvo = e.target;
+    if (alvo && ['INPUT', 'TEXTAREA', 'SELECT'].includes(alvo.tagName)) return;
+
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'ArrowRight':
+      case 'PageDown':
+      case ' ':
+        e.preventDefault();
+        go(atual + 1);
+        break;
+      case 'ArrowUp':
+      case 'ArrowLeft':
+      case 'PageUp':
+        e.preventDefault();
+        go(atual - 1);
+        break;
+      case 'Home':
+        e.preventDefault();
+        go(0);
+        break;
+      case 'End':
+        e.preventDefault();
+        go(slides.length - 1);
+        break;
+      case 'f':
+      case 'F':
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+        else document.exitFullscreen?.();
+        break;
+    }
+  });
+
+  document.getElementById('prev').addEventListener('click', () => go(atual - 1));
+  document.getElementById('next').addEventListener('click', () => go(atual + 1));
+  window.addEventListener('scroll', progresso, { passive: true });
+  window.addEventListener('resize', progresso);
+
+  // Estado inicial
+  slides[0].classList.add('is-visible');
+  atualizar();
+  progresso();
+})();
+</script>
+</body>
+</html>

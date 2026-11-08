@@ -1,64 +1,53 @@
 <script setup>
-// Componente reutilizado 4 vezes no App.vue, cada vez com props diferentes
+// Card de indicador reutilizado 4 vezes na Visão geral.
+// Usa as classes `card`, `card-body` e `progress` do Bootstrap e recebe
+// os dados por props; o texto de detalhe pode ser customizado via slot.
 defineProps({
-  titulo: String,
-  valor: String,
-  detalhe: String,
-  cor: {
-    type: String,
-    default: 'azul',
-  },
+  titulo: { type: String, required: true },
+  valor: { type: [String, Number], required: true },
+  sufixo: { type: String, default: '' },
+  icone: { type: String, required: true },
+  cor: { type: String, default: 'lilas' },
+  progresso: { type: Number, default: null },
+  corProgresso: { type: String, default: 'roxo' },
+  miniBarras: { type: Boolean, default: false },
 })
 </script>
 
 <template>
-  <article class="card" :class="cor">
-    <h3>{{ titulo }}</h3>
-    <p class="card__valor">{{ valor }}</p>
-    <p class="card__detalhe">{{ detalhe }}</p>
+  <article class="card cartao-resumo h-100">
+    <div class="card-body">
+      <div class="cartao-resumo__topo">
+        <span>{{ titulo }}</span>
+        <span class="cartao-icone" :class="`cartao-icone--${cor}`">
+          <i class="bi" :class="icone" aria-hidden="true"></i>
+        </span>
+      </div>
+
+      <strong>{{ valor }}<small v-if="sufixo" class="nota-total">{{ sufixo }}</small></strong>
+
+      <small class="cartao-resumo__detalhe">
+        <slot name="detalhe" />
+      </small>
+
+      <div
+        v-if="progresso !== null"
+        class="progress barra-progresso"
+        role="progressbar"
+        :aria-valuenow="progresso"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <div
+          class="progress-bar"
+          :class="`barra-progresso--${corProgresso}`"
+          :style="{ width: `${Math.min(100, Math.max(0, progresso))}%` }"
+        ></div>
+      </div>
+
+      <div v-if="miniBarras" class="mini-barras" aria-hidden="true">
+        <i v-for="n in 12" :key="n"></i>
+      </div>
+    </div>
   </article>
 </template>
-
-<style scoped>
-.card {
-  background: var(--papel);
-  border: 1px solid var(--linha);
-  border-left: 8px solid var(--cor-destaque);
-  border-radius: var(--raio);
-  padding: 1rem 1.25rem;
-}
-
-.azul {
-  --cor-destaque: var(--tinta);
-}
-.verde {
-  --cor-destaque: var(--aprovado);
-}
-.amarelo {
-  --cor-destaque: var(--lapis);
-}
-.vermelho {
-  --cor-destaque: var(--reprovado);
-}
-
-.card h3 {
-  font-size: 1rem;
-  font-family: system-ui, sans-serif;
-  font-weight: 600;
-  color: var(--tinta-clara);
-}
-
-.card__valor {
-  margin: 0.35rem 0 0;
-  font-family: Georgia, serif;
-  font-size: 2.4rem;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.card__detalhe {
-  margin: 0.4rem 0 0;
-  font-size: 0.85rem;
-  color: var(--tinta-clara);
-}
-</style>

@@ -1,136 +1,161 @@
 <script setup>
-import { ref } from 'vue'
+import { nextTick, ref, watch } from 'vue'
 
-// Prop: lista de turmas disponíveis, vinda do App.vue
-defineProps({
-  turmas: Array,
+// Modal de cadastro/edição usando as classes `modal`, `form-control`,
+// `form-select`, `btn` e `alert` do Bootstrap. A abertura continua sendo
+// controlada pela reatividade do Vue (v-if), sem depender do JS do Bootstrap.
+const props = defineProps({
+  aberto: { type: Boolean, default: false },
+  aluno: { type: Object, default: null },
+  turmas: { type: Array, required: true },
 })
 
-// Evento: envia o aluno cadastrado para o App.vue
-const emit = defineEmits(['salvar'])
+const emit = defineEmits(['salvar', 'fechar'])
 
-// Variáveis reativas ligadas aos campos com v-model
-const nome = ref('')
-const turma = ref('')
-const nota = ref(null)
+const formulario = ref({ nome: '', turma: '', email: '', responsavel: '' })
 const erro = ref('')
+const campoNome = ref(null)
 
-function salvar() {
-  if (nome.value.trim().length < 3) {
-    erro.value = 'Digite o nome completo do aluno (mínimo 3 letras).'
+// Sempre que o modal abre, copia os dados do aluno (edição) ou limpa o formulário.
+watch(
+  () => props.aberto,
+  async (aberto) => {
+    if (!aberto) return
+
+    formulario.value = props.aluno
+      ? {
+          nome: props.aluno.nome ?? '',
+          turma: props.aluno.turma ?? '',
+          email: props.aluno.email ?? '',
+          responsavel: props.aluno.responsavel ?? '',
+        }
+      : { nome: '', turma: '', email: '', responsavel: '' }
+
+    erro.value = ''
+    await nextTick()
+    campoNome.value?.focus()
+  },
+  { immediate: true },
+)
+
+function enviar() {
+  const nome = formulario.value.nome.trim()
+
+  if (nome.length < 3) {
+    erro.value = 'Informe o nome completo do aluno (mínimo 3 letras).'
     return
   }
-  if (turma.value === '') {
-    erro.value = 'Escolha a turma do aluno.'
-    return
-  }
-  if (nota.value === null || nota.value === '' || nota.value < 0 || nota.value > 10) {
-    erro.value = 'A nota precisa estar entre 0 e 10.'
+
+  if (!formulario.value.turma) {
+    erro.value = 'Selecione uma turma para o aluno.'
     return
   }
 
-  emit('salvar', {
-    nome: nome.value.trim(),
-    turma: turma.value,
-    nota: Number(nota.value),
-  })
-
-  // Limpa o formulário para o próximo cadastro
-  nome.value = ''
-  turma.value = ''
-  nota.value = null
-  erro.value = ''
+  emit('salvar', { ...formulario.value, nome })
 }
 </script>
 
 <template>
-  <form class="form" @submit.prevent="salvar">
-    <h3>Cadastrar aluno</h3>
+  <div
+    v-if="aberto"
+    class="modal fade show d-block"
+    tabindex="-1"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="titulo-modal"
+    @click.self="emit('fechar')"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <p class="sobretitulo">CADASTRO ACADÊMICO</p>
+            <h2 id="titulo-modal" class="modal-title">
+              {{ aluno ? 'Editar aluno' : 'Novo aluno' }}
+            </h2>
+          </div>
+          <button type="button" class="btn-close" aria-label="Fechar" @click="emit('fechar')"></button>
+        </div>
 
-    <label>
-      Nome do aluno
-      <input v-model="nome" type="text" placeholder="Ex.: Maria Souza" />
-    </label>
+        <form novalidate @submit.prevent="enviar">
+          <div class="modal-body">
+            <div class="campo-matricula">
+              <span>Matrícula</span>
+              <strong>{{ aluno ? aluno.matricula : 'Gerada automaticamente ao cadastrar' }}</strong>
+              <small>Número único de até 6 dígitos, sem usar dados pessoais.</small>
+            </div>
 
-    <label>
-      Turma
-      <select v-model="turma">
-        <option value="" disabled>Selecione</option>
-        <option v-for="t in turmas" :key="t" :value="t">{{ t }}</option>
-      </select>
-    </label>
+            <div class="mb-3">
+              <label for="aluno-nome" class="form-label">Nome completo</label>
+              <input
+                id="aluno-nome"
+                ref="campoNome"
+                v-model="formulario.nome"
+                type="text"
+                class="form-control"
+                required
+                minlength="3"
+                placeholder="Ex.: Marina Oliveira"
+                :class="{ 'is-invalid': erro && formulario.nome.trim().length < 3 }"
+              />
+            </div>
 
-    <label>
-      Nota final
-      <input v-model.number="nota" type="number" min="0" max="10" step="0.1" placeholder="0 a 10" />
-    </label>
+            <div class="mb-3">
+              <label for="aluno-turma" class="form-label">Turma</label>
+              <select
+                id="aluno-turma"
+                v-model="formulario.turma"
+                class="form-select"
+                required
+                :class="{ 'is-invalid': erro && !formulario.turma }"
+              >
+                <option value="" disabled>Selecione uma turma</option>
+                <option v-for="turma in turmas" :key="turma" :value="turma">{{ turma }}</option>
+              </select>
+            </div>
 
-    <p v-if="erro" class="form__erro" role="alert">{{ erro }}</p>
+            <div class="row g-3">
+              <div class="col-12 col-sm-6">
+                <label for="aluno-email" class="form-label">E-mail do aluno</label>
+                <input
+                  id="aluno-email"
+                  v-model="formulario.email"
+                  type="email"
+                  class="form-control"
+                  placeholder="aluno@escola.edu.br"
+                />
+              </div>
 
-    <button type="submit">Salvar aluno</button>
-  </form>
+              <div class="col-12 col-sm-6">
+                <label for="aluno-responsavel" class="form-label">Responsável</label>
+                <input
+                  id="aluno-responsavel"
+                  v-model="formulario.responsavel"
+                  type="text"
+                  class="form-control"
+                  placeholder="Nome do responsável"
+                />
+              </div>
+            </div>
+
+            <div v-if="erro" class="alert alert-danger py-2 px-3 mt-3 mb-0" role="alert">
+              <i class="bi bi-exclamation-triangle me-1"></i>{{ erro }}
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" @click="emit('fechar')">
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-check-lg me-1"></i>
+              {{ aluno ? 'Salvar alterações' : 'Cadastrar aluno' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div v-if="aberto" class="modal-backdrop fade show"></div>
 </template>
-
-<style scoped>
-.form {
-  display: grid;
-  gap: 0.9rem;
-  background: var(--papel);
-  border: 1px solid var(--linha);
-  border-radius: var(--raio);
-  padding: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-
-.form label {
-  display: grid;
-  gap: 0.3rem;
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.form input,
-.form select {
-  padding: 0.55rem 0.7rem;
-  border: 1px solid var(--linha);
-  border-radius: 8px;
-  background: #fff;
-  color: var(--tinta);
-}
-
-.form__erro {
-  margin: 0;
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  background: #fbe9e8;
-  color: var(--reprovado);
-  font-size: 0.9rem;
-}
-
-.form button {
-  justify-self: start;
-  background: var(--tinta);
-  color: #fff;
-  border: none;
-  border-radius: var(--raio);
-  padding: 0.6rem 1.25rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.form button:hover {
-  background: #2a3f6b;
-}
-
-@media (min-width: 720px) {
-  .form {
-    grid-template-columns: 2fr 1fr 1fr;
-    align-items: end;
-  }
-  .form h3,
-  .form__erro,
-  .form button {
-    grid-column: 1 / -1;
-  }
-}
-</style>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="EduGestão">
+  <rect width="64" height="64" rx="16" fill="#7866e0" />
+  <path d="M32 15 8 26l24 11 20-9.17V40h4V26L32 15Z" fill="#fff" />
+  <path d="M18 33.5V42c0 4.2 6.3 7.5 14 7.5s14-3.3 14-7.5v-8.5l-14 6.4-14-6.4Z" fill="#fff" opacity=".82" />
+</svg>
