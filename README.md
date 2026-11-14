@@ -5,16 +5,15 @@ Painel responsivo de gestão acadêmica escolar para professores e coordenação
 [![Vue.js](https://img.shields.io/badge/Vue_3-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)](https://vuejs.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap_5-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
-[![Status](https://img.shields.io/badge/status-pronto-yellow?style=for-the-badge)](#-limitações-conhecidas)
+[![Status](https://img.shields.io/badge/status-SPA%20com%20Vue%20Router-yellow?style=for-the-badge)](#-navegação-spa-com-vue-router)
 [![Persistência](https://img.shields.io/badge/persistência-localStorage-4B5563?style=for-the-badge)](#-limitações-conhecidas)
 
 ---
 
 ## 📊 Apresentação
 
-- **[Deck navegável](apresentacao/index.html)** — 6 telas no tema do app. Use `↑`/`↓` para navegar e `F` para tela cheia.
-- **[PDF da apresentação](apresentacao/EduGestao-Bootstrap5.pdf)** — versão para entrega (6 páginas, 16:9).
-- **[Roteiro de 5 minutos](apresentacao/roteiro.md)** — fala por slide, checklist da demo e respostas para as perguntas prováveis.
+- **[Deck navegável](apresentacao/index.html)** — apresentação atualizada sobre Vue Router. Use `↑`/`↓` para navegar e `F` para tela cheia.
+- **[Roteiro de 5 minutos](apresentacao/roteiro.md)** — conteúdo e ordem da apresentação.
 
 [![Capa da apresentação do EduGestão](docs/apresentacao.png)](apresentacao/index.html)
 
@@ -36,7 +35,7 @@ Painel responsivo de gestão acadêmica escolar para professores e coordenação
 
 | Modal de cadastro | Mobile |
 | --- | --- |
-| [![Modal de cadastro de aluno com campos do Bootstrap](docs/modal.png)](docs/modal.png) | [![Menu lateral em formato offcanvas no celular](docs/mobile-menu.png)](docs/mobile-menu.png) |
+| [![Modal de cadastro de aluno](docs/modal.png)](docs/modal.png) | [![Menu de navegação do EduGestão em tela mobile](docs/mobile-menu.png)](docs/mobile-menu.png) |
 
 ### Antes e depois
 
@@ -54,7 +53,7 @@ As capturas da primeira versão foram preservadas para comparação:
 
 Sistema criado a partir de uma necessidade real de sala de aula: professores e coordenadores precisam consultar e editar notas e informações dos alunos de forma simples. O EduGestão reúne essas tarefas em um painel único, com navegação por telas e indicadores calculados automaticamente.
 
-É um **protótipo de interface**: funciona 100% no navegador, sem servidor e sem banco de dados. Nesta versão, o projeto recebeu o **Bootstrap 5** como framework CSS, mantendo as funcionalidades e a reatividade em Vue.js.
+É um **protótipo de interface**: funciona no navegador, sem API ou banco de dados. O Bootstrap 5 continua instalado como framework CSS, com Bootstrap Icons, enquanto as páginas mantêm o tema próprio do EduGestão.
 
 ---
 
@@ -63,7 +62,7 @@ Sistema criado a partir de uma necessidade real de sala de aula: professores e c
 **Visão geral**
 
 - Painel com indicadores de matrículas, média escolar, aprovações e frequência.
-- Cards responsivos com barras de progresso do Bootstrap.
+- Cards responsivos com barras de progresso reativas.
 
 **Alunos**
 
@@ -85,23 +84,48 @@ Sistema criado a partir de uma necessidade real de sala de aula: professores e c
 **Frequência**
 
 - Chamada diária com registro de presença ou ausência por aluno.
-- Selos de status (`badge`) do Bootstrap.
+- Selos de status para presença, ausência e pendências.
 
 **Geral**
 
 - Persistência local dos cadastros, notas e registros de frequência no navegador.
-- Layout responsivo (desktop, tablet e celular), com menu lateral em `offcanvas` no mobile.
+- Layout responsivo (desktop, tablet e celular), com menu horizontal no mobile.
+- Navegação SPA com Vue Router, URLs próprias, histórico do navegador e fallback 404.
+
+## 🧭 Navegação SPA com Vue Router
+
+O Vue Router exibe cada página dentro de `RouterView`. Os links do menu usam
+`RouterLink`, então a URL e o histórico do navegador são atualizados sem
+recarregar o documento. O estado compartilhado em `src/dados/escola.js` mantém
+alunos, notas e frequência ao navegar entre páginas.
+
+| Rota | Página |
+| --- | --- |
+| `/` | Visão geral |
+| `/alunos` | Cadastro, busca e ações dos alunos |
+| `/alunos/:id` | Detalhes, boletim e frequência individual |
+| `/turmas` | Resumo das turmas |
+| `/notas` | Lançamento de notas |
+| `/frequencia` | Chamada diária |
+| `/sobre` | Sobre o projeto e a navegação SPA |
+| Demais caminhos | Página 404 |
+
+O roteiro atualizado dos quatro slides da atividade está em
+[docs/apresentacao.md](docs/apresentacao.md). A demonstração pode ser feita
+localmente com `npm run dev`, incluindo a navegação entre rotas, a URL dinâmica
+de um aluno e a página 404.
 
 ---
 
 ## 🎨 Framework CSS: Bootstrap 5
 
-### Por que Bootstrap?
+### Como o Bootstrap é usado nesta versão
 
-- Já oferece **componentes prontos** (cards, tabelas, modais, botões, formulários, badges) que cobrem exatamente os elementos da aplicação.
-- O **grid responsivo** (`row`, `col-*`, `row-cols-*`) resolve a adaptação para tablet e celular sem reescrever a estilização.
-- As **classes utilitárias** (`d-none`, `d-md-flex`, `gap-*`, `h-100`, `align-middle`) tornam a responsividade explícita no template.
-- É fácil de explicar e defender na apresentação, pois os nomes das classes descrevem o que fazem.
+- Bootstrap 5 e Bootstrap Icons são dependências npm versionadas.
+- `table-responsive` fornece rolagem horizontal nas tabelas em telas menores.
+- Bootstrap Icons é usado nos ícones do menu.
+- O layout e os componentes visuais mantêm o CSS próprio do EduGestão; os
+  estados, formulários e a navegação ficam sob controle do Vue.
 
 ### Como foi integrado
 
@@ -119,52 +143,37 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import './assets/main.css'
 ```
 
-O `main.css` é carregado por último para que o tema do EduGestão sobrescreva cores, fontes e espaçamentos do Bootstrap quando necessário. A customização usa as **variáveis CSS do próprio Bootstrap** (`--bs-primary`, `--bs-body-font-family`, `--bs-border-radius` etc.) e as variáveis internas dos componentes (`--bs-btn-bg`, `--bs-progress-bar-bg`).
-
-### Classes e recursos utilizados
-
-| Classe / recurso | Onde foi usada | O que faz |
-| --- | --- | --- |
-| `offcanvas-lg` + `offcanvas-start` + `show` | Menu lateral | No desktop vira menu fixo; abaixo de 992px vira gaveta lateral controlada pelo estado `menuAberto` do Vue. |
-| `row`, `col-*`, `row-cols-*`, `g-3` | Cards, turmas e grade do painel | Grid responsivo: 2 cards por linha no celular e 4 no desktop, com espaçamento consistente. |
-| `card`, `card-body`, `h-100` | Cards de indicadores e turmas | Estrutura pronta de card, com altura igual entre os itens da mesma linha. |
-| `table`, `table-hover`, `table-responsive`, `align-middle` | Todas as tabelas | Padrão visual de tabela, destaque no hover, rolagem horizontal no celular e alinhamento vertical. |
-| `modal`, `modal-dialog`, `modal-content`, `modal-header/body/footer` | Cadastro/edição de aluno | Estrutura completa do modal, com cabeçalho, corpo e rodapé de ações. |
-| `btn`, `btn-primary`, `btn-outline-primary`, `btn-outline-danger`, `btn-sm` | Botões da aplicação | Botões com estados de hover/focus e variações de cor e tamanho. |
-| `form-control`, `form-select`, `form-label`, `is-invalid` | Formulário do modal | Campos padronizados, foco acessível e indicação visual de erro. |
-| `progress`, `progress-bar` | Cards de média, frequência e aprovação | Barras de progresso com `role="progressbar"` e largura calculada por `computed`. |
-| `badge`, `rounded-pill` | Situação do aluno e frequência | Selos arredondados para aprovado, recuperação, atenção e pendente. |
-| `d-none`, `d-md-flex`, `d-lg-none`, `d-xl-inline` | Cabeçalho, menu e ações | Utilitários de exibição por breakpoint (esconder busca no celular, mostrar hambúrguer etc.). |
-| `alert`, `alert-danger` | Erro do formulário | Mensagem de validação com o padrão visual do Bootstrap. |
-| `d-flex`, `flex-column`, `flex-sm-row`, `justify-content-between`, `gap-*` | Cabeçalhos das páginas e rodapé | Utilitários de layout flexbox para empilhar no celular e alinhar no desktop. |
-
-> **Observação:** o Bootstrap foi usado como base de componentes e responsividade, mas o projeto mantém sua identidade visual (paleta lilás, tipografia Manrope/DM Sans e cartões com detalhes próprios) por meio de CSS customizado.
+O Bootstrap e os ícones são importados em `src/main.js` antes do CSS do
+EduGestão, que mantém a identidade visual da aplicação. Os controles
+interativos (navegação, formulário e modal) continuam sob controle do Vue,
+sem inicializar um segundo framework JavaScript.
 
 ---
 
-## 🧩 Componentização Vue
+## 🧩 Organização Vue
 
-O estado e as regras de negócio continuam centralizados em `src/App.vue`, que agora orquestra componentes menores:
-
-| Componente | Responsabilidade | Recursos Vue |
-| --- | --- | --- |
-| `AppSidebar.vue` | Marca, menu de navegação, escola e perfil | `props`, `emits` |
-| `AppHeader.vue` | Título, data, busca, notificações e avatar | `defineModel`, `props`, `emits` |
-| `ResumoCard.vue` | Card de indicador com ícone, valor e progresso | `props`, `slot` nomeado |
-| `StatusBadge.vue` | Selo de situação | `props` |
-| `FormAluno.vue` | Modal de cadastro/edição e validação | `props`, `emits`, `watch`, `nextTick`, `v-model` |
-| `AppFooter.vue` | Rodapé | `props` |
-
-Os componentes `ListaAlunos.vue` e `MembroEquipe.vue` são legados da primeira versão e não são usados pela interface atual.
+- `src/App.vue` mantém o layout compartilhado, o menu com `RouterLink`, o
+  cabeçalho, o modal de cadastro e o `RouterView`.
+- `src/router/index.js` associa cada URL ao componente da página e configura o
+  histórico, o título e a página 404.
+- `src/views/` contém as páginas da visão geral, alunos, detalhes do aluno,
+  turmas, notas, frequência, sobre e 404.
+- `src/dados/escola.js` centraliza os dados reativos, as regras de negócio e a
+  persistência no `localStorage`, compartilhados por todas as rotas.
+- `src/components/` preserva os componentes Vue da etapa anterior; os que não
+  integram o layout atual continuam como legado.
 
 ---
 
 ## 📱 Responsividade
 
-- **Desktop (≥ 1200px):** menu fixo de 264px, 4 cards por linha e painel em duas colunas.
-- **Tablet (768–1199px):** 2 cards por linha, painel empilhado e tabelas com rolagem horizontal.
-- **Celular (< 768px):** menu em `offcanvas` com botão hambúrguer e fundo escurecido, busca do cabeçalho oculta, cards em 2 colunas compactas e ações da tabela apenas com ícones.
-- **Acessibilidade:** foco visível, `aria-label` nos controles, `aria-current` no menu, `role="progressbar"` e textos alternativos nos ícones.
+- **Desktop:** menu lateral fixo e painel responsivo em colunas.
+- **Telas menores (≤ 820px):** menu lateral passa para o topo e pode rolar
+  horizontalmente; o conteúdo usa a largura disponível.
+- **Celular (≤ 560px):** busca do cabeçalho compacta, cards e filtros se adaptam
+  à largura e as tabelas mantêm rolagem horizontal.
+- **Acessibilidade:** foco visível, rótulos ARIA nos controles e navegação por
+  links semânticos.
 
 ---
 
@@ -214,10 +223,13 @@ EduGest-o/
 ├── vite.config.js
 ├── package.json
 └── src/
-    ├── App.vue                    # estado, regras de negócio e composição das telas
-    ├── main.js                    # Bootstrap + Vue
+    ├── App.vue                    # layout compartilhado, modal e RouterView
+    ├── main.js                    # Bootstrap + Vue + Vue Router
+    ├── router/index.js            # rotas SPA
+    ├── dados/escola.js            # estado e regras compartilhados
+    ├── views/                     # páginas por rota
     ├── assets/
-    │   └── main.css               # tema próprio sobre o Bootstrap
+    │   └── main.css               # identidade visual do EduGestão
     └── components/
         ├── AppSidebar.vue
         ├── AppHeader.vue
@@ -240,7 +252,10 @@ O projeto inclui o workflow `.github/workflows/deploy.yml`. Para publicar:
 3. Envie a branch `main`; o workflow faz o build e publica a pasta `dist`.
 4. A aplicação fica disponível em `https://<usuario>.github.io/EduGest-o/`.
 
-O `vite.config.js` usa `base: './'`, então os arquivos funcionam tanto na raiz quanto em um subdiretório do GitHub Pages.
+No GitHub Actions, o `vite.config.js` define `/EduGest-o/` como base de
+publicação. O workflow também copia `index.html` para `404.html`, permitindo
+que caminhos como `/EduGest-o/alunos/1` carreguem a SPA quando acessados
+diretamente ou atualizados. Fora do Actions, o app usa `/` como base local.
 
 ---
 
@@ -250,8 +265,13 @@ O `vite.config.js` usa `base: './'`, então os arquivos funcionam tanto na raiz 
 - **Estado derivado**: indicadores, médias e situações são calculados por `computed`, nunca armazenados duplicados.
 - **Persistência no cliente**: serialização em JSON no `localStorage`, com `watch` de profundidade (`deep: true`) para salvar automaticamente.
 - **Componentização**: divisão do `App.vue` em componentes com props, emits, `v-model` e slots.
-- **Framework CSS**: integração do Bootstrap 5 via npm, uso de grid, componentes, utilitários e customização por variáveis CSS.
-- **Responsividade**: breakpoints do Bootstrap + CSS próprio para o layout do painel.
+- **Vue Router**: mapeamento de URLs para páginas, navegação com `RouterLink`,
+  exibição com `RouterView`, rota dinâmica e página 404.
+- **SPA em hospedagem estática**: configuração de base para GitHub Pages e
+  fallback de navegação direta para rotas internas.
+- **Framework CSS**: Bootstrap 5 e Bootstrap Icons instalados por npm, com
+  utilitário `table-responsive`; estilos específicos preservam o tema do painel.
+- **Responsividade**: breakpoints do CSS do projeto para o layout do painel.
 - **Acessibilidade**: foco visível, rótulos ARIA e estados semânticos.
 
 ---

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>EduGestão × Bootstrap 5 — Apresentação</title>
-<meta name="description" content="Apresentação do projeto EduGestão com Bootstrap 5 — disciplina de Front-End Frameworks." />
+<title>EduGestão × Vue Router — Apresentação</title>
+<meta name="description" content="Apresentação do projeto EduGestão e da navegação SPA com Vue Router." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -1226,18 +1226,17 @@ body:hover .navbtn, .navbtn:focus-visible { opacity: 1; }
     <div class="slide-content cover">
       <div class="cover-grid">
         <div>
-          <p class="kicker reveal">2ª avaliação · apresentação</p>
+          <p class="kicker reveal">Front-End Frameworks · apresentação</p>
           <h1 class="reveal" style="--d:.06s">Edu<span>Gestão</span></h1>
           <p class="lead reveal" style="--d:.12s">
-            Do CSS artesanal ao <b>Bootstrap 5</b>: como um framework CSS
-            deixou um painel escolar em Vue 3 mais consistente, responsivo
-            e fácil de manter — sem refazer o projeto.
+            Do painel escolar à <b>navegação SPA</b>: como o Vue Router organiza
+            as páginas do EduGestão sem recarregar toda a aplicação.
           </p>
           <div class="cover__meta reveal" style="--d:.18s">
             <span class="chip"><i></i>Vue 3 + Vite</span>
-            <span class="chip"><i></i>Bootstrap 5.3.8</span>
-            <span class="chip chip--gold"><i></i>Bootstrap Icons</span>
-            <span class="chip chip--green"><i></i>35/35 verificações</span>
+            <span class="chip"><i></i>Vue Router 4</span>
+            <span class="chip chip--gold"><i></i>Bootstrap 5 mantido</span>
+            <span class="chip chip--green"><i></i>Rotas SPA</span>
           </div>
         </div>
 
@@ -1245,10 +1244,10 @@ body:hover .navbtn, .navbtn:focus-visible { opacity: 1; }
           <span class="side-label">Nesta apresentação</span>
           <strong class="side-title">4 slides, 5 minutos</strong>
           <ul>
-            <li><span class="n">01</span><span><b>Projeto e framework</b> — o EduGestão e por que Bootstrap.</span></li>
-            <li><span class="n">02</span><span><b>Integração</b> — npm e as classes que fazem o layout.</span></li>
-            <li><span class="n">03</span><span><b>Evolução visual</b> — antes, depois e responsividade.</span></li>
-            <li><span class="n">04</span><span><b>Demonstração</b> — vantagens, dificuldades e aprendizados.</span></li>
+            <li><span class="n">01</span><span><b>Projeto e SPA</b> — páginas sem recarregar o documento.</span></li>
+            <li><span class="n">02</span><span><b>Vue Router</b> — configuração, RouterLink e RouterView.</span></li>
+            <li><span class="n">03</span><span><b>Rotas</b> — telas, parâmetro dinâmico e 404.</span></li>
+            <li><span class="n">04</span><span><b>Demonstração</b> — navegação e aprendizados.</span></li>
           </ul>
           <div class="side-foot">
             <b>Integrantes:</b> Alexander Protasio - 04205254, Iarleyy Couto - 0423707, Igor Carvalho - 04202039, Joaquim Conceição - 04212732, Marlon Carneiro - 04211625, Moises de Aviz - 04026375<br />
@@ -1260,57 +1259,56 @@ body:hover .navbtn, .navbtn:focus-visible { opacity: 1; }
   </section>
 
   <!-- ======================================================= SLIDE 1 -->
-  <section class="slide" id="slide-1" data-label="Projeto e framework">
+  <section class="slide" id="slide-1" data-label="Projeto e conceito de SPA">
     <div class="slide-content">
       <header class="slide__head reveal">
         <div>
-          <p class="kicker">Slide 01 · Projeto e framework</p>
-          <h2 class="headline" style="margin-top:.5rem">Um painel escolar que precisava de <span class="hl">acabamento e escala</span>.</h2>
+          <p class="kicker">Slide 01 · Projeto e conceito de SPA</p>
+          <h2 class="headline" style="margin-top:.5rem">Um painel escolar que navega entre páginas <span class="hl">sem recarregar</span>.</h2>
         </div>
         <p class="head-note">
-          A proposta, as telas e as regras de negócio da 1ª avaliação
-          continuam as mesmas. O que mudou foi a base visual.
+          O Vue Router organiza as telas existentes em URLs e componentes,
+          mantendo o menu e os dados compartilhados.
         </p>
       </header>
 
       <div class="s1-grid">
         <div class="panel reveal" style="--d:.08s">
           <span class="panel__label">O projeto</span>
-          <h3>EduGestão — gestão escolar em uma única tela</h3>
+          <h3>EduGestão — gestão escolar em páginas conectadas</h3>
           <p>
             Painel para professores e coordenação acompanharem alunos, turmas,
-            notas e frequência. Os dados ficam no navegador e toda a interface
-            reage às mudanças de estado do Vue.
+            notas e frequência. Cada tela tem sua rota, enquanto o layout e os
+            dados continuam compartilhados.
           </p>
           <div class="stat-row">
-            <div class="stat"><b>5</b><span>telas</span></div>
-            <div class="stat"><b>6</b><span>componentes Vue</span></div>
-            <div class="stat"><b>100%</b><span>localStorage</span></div>
+            <div class="stat"><b>8</b><span>rotas</span></div>
+            <div class="stat"><b>8</b><span>páginas Vue</span></div>
+            <div class="stat"><b>SPA</b><span>navegação cliente</span></div>
           </div>
           <p style="margin-top:.8rem; color:#8b8aa0; font-size:var(--micro-size)">
-            <b style="color:var(--ink-2)">O que foi preservado:</b> CRUD de alunos,
-            cálculo de médias, chamada diária, busca por matrícula e persistência local.
+            <b style="color:var(--ink-2)">O que foi preservado:</b> Bootstrap 5,
+            cadastro de alunos, cálculo de médias, chamada diária e persistência local.
           </p>
         </div>
 
         <div class="fw-card reveal" style="--d:.16s">
           <div class="fw-card__top">
-            <span class="fw-badge" aria-hidden="true">B</span>
-            <span class="fw-version">v5.3.8 · npm</span>
+            <span class="fw-badge" aria-hidden="true">V</span>
+            <span class="fw-version">v4 · npm</span>
           </div>
-          <h3>Bootstrap 5 + Bootstrap Icons</h3>
-          <p>Framework escolhido para dar base de componentes e responsividade sem apagar a identidade do EduGestão.</p>
+          <h3>Single Page Application</h3>
+          <p>O navegador carrega o app uma vez; o Vue Router atualiza a URL e o conteúdo da página no cliente.</p>
 
           <ul class="reasons">
-            <li><span class="n">01</span><span><b>Componentes prontos</b> que o projeto já precisava: card, tabela, modal, botão, formulário e badge.</span></li>
-            <li><span class="n">02</span><span><b>Grid e utilitários responsivos</b> resolvem desktop, tablet e celular com classes declarativas.</span></li>
-            <li><span class="n">03</span><span><b>Fácil de explicar e manter</b>: nomes legíveis, documentação madura e customização por variáveis CSS.</span></li>
+            <li><span class="n">01</span><span><b>Rotas próprias</b> tornam as páginas acessíveis por URL e compartilháveis.</span></li>
+            <li><span class="n">02</span><span><b>RouterLink e RouterView</b> navegam entre páginas sem recarga completa.</span></li>
+            <li><span class="n">03</span><span><b>Estado reativo compartilhado</b> preserva alunos, notas e frequência entre telas.</span></li>
           </ul>
 
           <p class="fw-foot">
-            Alternativas consideradas: <b>Tailwind</b> exigiria reescrever o CSS utilitário em todas as telas;
-            <b>Bulma</b> tem ecossistema menor de componentes prontos. Bootstrap ofereceu o melhor custo-benefício
-            para evoluir o que já existia.
+            SPA tradicional exige uma nova resposta HTML a cada navegação;
+            aqui o roteamento acontece no cliente e o histórico do navegador continua funcionando.
           </p>
         </div>
       </div>
@@ -1318,16 +1316,16 @@ body:hover .navbtn, .navbtn:focus-visible { opacity: 1; }
   </section>
 
   <!-- ======================================================= SLIDE 2 -->
-  <section class="slide" id="slide-2" data-label="Integração e classes">
+  <section class="slide" id="slide-2" data-label="Integração e configuração do Vue Router">
     <div class="slide-content">
       <header class="slide__head reveal">
         <div>
-          <p class="kicker">Slide 02 · Integração e implementação</p>
-          <h2 class="headline" style="margin-top:.5rem">Instalação via <span class="hl">npm</span> e classes que fazem o layout funcionar.</h2>
+          <p class="kicker">Slide 02 · Integração e configuração do Vue Router</p>
+          <h2 class="headline" style="margin-top:.5rem">A rota aponta para a página; <span class="hl">RouterView</span> mostra o componente.</h2>
         </div>
         <p class="head-note">
-          O Bootstrap entra como dependência do projeto; o tema do EduGestão
-          é carregado depois e ajusta cores, fontes e espaçamentos.
+          O Vue Router é instalado pelo npm e conectado à aplicação em `main.js`.
+          Bootstrap 5 e os estilos existentes continuam no projeto.
         </p>
       </header>
 
@@ -1335,76 +1333,79 @@ body:hover .navbtn, .navbtn:focus-visible { opacity: 1; }
         <div class="code-panel reveal" style="--d:.08s">
           <div class="code-block">
             <div class="code-block__bar"><i></i><i></i><i></i><span>terminal</span></div>
-            <pre><span class="tok-c"># dependências versionadas no package.json</span>
-<span class="tok-p">npm</span> install bootstrap bootstrap-icons</pre>
+            <pre><span class="tok-c"># dependência versionada no package.json</span>
+<span class="tok-p">npm</span> install vue-router@4</pre>
           </div>
 
           <div class="code-block">
-            <div class="code-block__bar"><i></i><i></i><i></i><span>src/main.js</span></div>
-            <pre><span class="tok-k">import</span> <span class="tok-s">'bootstrap/dist/css/bootstrap.min.css'</span>
-<span class="tok-k">import</span> <span class="tok-s">'bootstrap-icons/font/bootstrap-icons.css'</span>
-<span class="tok-k">import</span> <span class="tok-s">'./assets/main.css'</span> <span class="tok-c">// tema por último</span></pre>
+            <div class="code-block__bar"><i></i><i></i><i></i><span>src/router/index.js</span></div>
+            <pre><span class="tok-k">const</span> router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    { path: <span class="tok-s">'/'</span>, component: VisaoGeralView },
+    { path: <span class="tok-s">'/alunos'</span>, component: AlunosView },
+    { path: <span class="tok-s">'/alunos/:id'</span>, component: AlunoDetalheView, props: <span class="tok-p">true</span> },
+    { path: <span class="tok-s">'/:pathMatch(.*)*'</span>, component: NaoEncontradaView },
+  ],
+})</pre>
           </div>
 
           <div class="integration-note">
             <span class="ico">i</span>
             <span>
-              <b>Por que npm e não CDN?</b> O Vite empacota, versiona e otimiza o CSS junto com o app.
-              A ordem de importação garante que o <b>main.css</b> sobrescreva o Bootstrap onde o projeto tem identidade própria.
+              Em <b>main.js</b>, <span class="mono">.use(router)</span> instala o roteador. No <b>App.vue</b>, <span class="mono">RouterLink</span> navega e <span class="mono">RouterView</span> mostra a página atual.
             </span>
           </div>
 
           <div class="integration-note">
             <span class="ico" style="background:#fff4e3;color:#b98345">%</span>
             <span>
-              <b>Customização por variáveis:</b> <span class="mono">--bs-primary</span>,
-              <span class="mono">--bs-body-font-family</span>, <span class="mono">--bs-btn-bg</span> e
-              <span class="mono">--bs-progress-bar-bg</span> mantêm a paleta lilás sem duplicar CSS.
+              <b>createWebHistory</b> habilita URLs limpas e voltar/avançar; o workflow cria um <b>404.html</b> para atualizar rotas no GitHub Pages.
             </span>
           </div>
         </div>
 
         <div class="class-grid reveal" style="--d:.16s">
           <article class="class-card">
-            <code>offcanvas-lg</code>
-            <b>Menu lateral</b>
-            <p>Fixo no desktop; gaveta lateral abaixo de 992px. O estado <span class="mono">menuAberto</span> do Vue controla a classe <span class="mono">show</span>.</p>
-            <div class="demo"><i></i><i></i><i></i><em>responsivo</em></div>
+            <code>createRouter()</code>
+            <b>Configuração</b>
+            <p>Relaciona cada <span class="mono">path</span> ao componente da rota.</p>
+            <div class="demo"><i></i><i></i><i></i><em>rotas</em></div>
           </article>
 
           <article class="class-card">
-            <code>row · col · row-cols-xl-4</code>
-            <b>Grid dos cards</b>
-            <p>2 cards por linha no celular e 4 no desktop, com <span class="mono">g-3</span> para espaçamento consistente.</p>
-            <div class="demo"><i></i><i></i><i></i><em>grid</em></div>
+            <code>RouterLink</code>
+            <b>Navegação</b>
+            <p>Atualiza a rota sem recarregar o documento inteiro.</p>
+            <div class="demo"><i></i><i></i><i></i><em>links SPA</em></div>
           </article>
 
           <article class="class-card">
-            <code>card · card-body · h-100</code>
-            <b>Cards de indicadores</b>
-            <p>Estrutura pronta de card e altura igual entre os itens da mesma linha.</p>
-            <div class="demo"><i></i><i></i><i></i><em>componente</em></div>
+            <code>RouterView</code>
+            <b>Página atual</b>
+            <p>Renderiza o componente associado à URL atual.</p>
+            <div class="demo"><i></i><i></i><i></i><em>página</em></div>
           </article>
 
           <article class="class-card">
-            <code>table-hover · table-responsive</code>
-            <b>Tabelas</b>
-            <p>Padrão visual, destaque na linha e rolagem horizontal no celular sem quebrar o layout.</p>
-            <div class="demo"><i></i><i></i><i></i><em>dados</em></div>
+            <code>/alunos/:id</code>
+            <b>Rota dinâmica</b>
+            <p>O parâmetro <span class="mono">id</span> seleciona o aluno para a ficha individual.</p>
+            <div class="demo"><i></i><i></i><i></i><em>parâmetro</em></div>
           </article>
 
           <article class="class-card">
-            <code>modal · form-control · is-invalid</code>
-            <b>Cadastro de aluno</b>
-            <p>Modal centralizado, campos padronizados e estado visual de erro na validação.</p>
-            <div class="demo"><i></i><i></i><i></i><em>formulário</em></div>
+            <code>Router history</code>
+            <b>Voltar e avançar</b>
+            <p>O histórico do navegador acompanha a navegação entre telas.</p>
+            <div class="demo"><i></i><i></i><i></i><em>histórico</em></div>
           </article>
 
           <article class="class-card">
-            <code>badge · rounded-pill · progress</code>
-            <b>Status e indicadores</b>
-            <p>Selos de situação e barras de progresso com largura calculada por <span class="mono">computed</span>.</p>
-            <div class="demo"><i></i><i></i><i></i><em>feedback</em></div>
+            <code>404 · :pathMatch(.*)*</code>
+            <b>Rota não encontrada</b>
+            <p>URLs desconhecidas exibem uma página com retorno para o início.</p>
+            <div class="demo"><i></i><i></i><i></i><em>fallback</em></div>
           </article>
         </div>
       </div>
@@ -1412,35 +1413,35 @@ body:hover .navbtn, .navbtn:focus-visible { opacity: 1; }
   </section>
 
   <!-- ======================================================= SLIDE 3 -->
-  <section class="slide" id="slide-3" data-label="Evolução visual">
+  <section class="slide" id="slide-3" data-label="Rotas implementadas">
     <div class="slide-content">
       <header class="slide__head reveal">
         <div>
-          <p class="kicker">Slide 03 · Evolução visual</p>
-          <h2 class="headline" style="margin-top:.5rem">Antes e depois: <span class="hl">mesma função, outra presença</span>.</h2>
+          <p class="kicker">Slide 03 · Rotas implementadas</p>
+          <h2 class="headline" style="margin-top:.5rem">Cada funcionalidade tem uma URL e um <span class="hl">componente Vue</span>.</h2>
         </div>
         <p class="head-note">
-          Capturas reais da aplicação. A versão anterior foi preservada
-          em <span class="mono">docs/antes-*.png</span> para comparação.
+          Menu, cabeçalho e estado permanecem compartilhados; o RouterView troca
+          somente o conteúdo da rota atual.
         </p>
       </header>
 
       <div class="s3">
         <div class="ba-row">
           <figure class="shot shot--before reveal" style="--d:.06s">
-            <span class="shot__tag">Antes · 1ª avaliação</span>
-            <img src="../docs/antes-visao-geral.png" alt="Visão geral do EduGestão antes do Bootstrap: cabeçalho escuro, cards com borda colorida e tabela densa." />
+            <span class="shot__tag">Visão geral · /</span>
+            <img src="../docs/preview.png" alt="Página de visão geral do EduGestão com indicadores e menu de navegação." />
             <figcaption class="shot__caption">
-              <span><b>CSS artesanal.</b> Cabeçalho escuro, cards com borda grossa e tabela compacta.</span>
+              <span><b>Resumo escolar.</b> Indicadores, alunos recentes e turmas.</span>
               <span>1440px</span>
             </figcaption>
           </figure>
 
           <figure class="shot shot--after reveal" style="--d:.12s">
-            <span class="shot__tag">Depois · Bootstrap 5</span>
-            <img src="../docs/preview.png" alt="Visão geral do EduGestão depois do Bootstrap: menu lateral, cards com ícones e barras de progresso, tabela com badges." />
+            <span class="shot__tag">Alunos · /alunos</span>
+            <img src="../docs/alunos.png" alt="Página de cadastro de alunos com busca, filtro de turma e ações." />
             <figcaption class="shot__caption">
-              <span><b>Bootstrap + tema próprio.</b> Menu lateral, cards com ícones e progresso, badges de situação.</span>
+              <span><b>Cadastro acadêmico.</b> Busca, filtro, edição e rota para detalhes.</span>
               <span>1440px</span>
             </figcaption>
           </figure>
@@ -1448,21 +1449,22 @@ body:hover .navbtn, .navbtn:focus-visible { opacity: 1; }
 
         <div class="s3-bottom">
           <div class="mudancas reveal" style="--d:.18s">
-            <h3>3 elementos visuais modificados</h3>
+            <h3>Rotas e funcionalidades</h3>
             <ol>
-              <li><b>Cabeçalho e menu</b><span>Menu lateral fixo, busca, avatar e notificações; offcanvas no celular.</span></li>
-              <li><b>Cards e indicadores</b><span>Grid responsivo, ícones, barras de progresso e hover suave.</span></li>
-              <li><b>Tabelas, modal e rodapé</b><span>Hover, badges, modal validado e formulário padronizado.</span></li>
+              <li><b>/</b><span>Visão geral com indicadores e resumo das turmas.</span></li>
+              <li><b>/alunos/:id</b><span>Rota dinâmica com boletim e frequência individual.</span></li>
+              <li><b>/turmas · /notas · /frequencia</b><span>Gestão das turmas, notas e chamada diária.</span></li>
+              <li><b>/sobre · 404</b><span>Explicação da SPA e tratamento de caminhos desconhecidos.</span></li>
             </ol>
           </div>
 
           <div class="responsivo reveal" style="--d:.24s">
-            <h3>Responsividade verificada</h3>
+            <h3>Componentes e navegação</h3>
             <div class="bp-list">
-              <div class="bp"><b>≥ 1200px</b><span>menu fixo · 4 cards por linha · painel em 2 colunas</span></div>
-              <div class="bp"><b>768–1199</b><span>2 cards por linha · painel empilhado · tabelas com scroll</span></div>
-              <div class="bp"><b>&lt; 768px</b><span>offcanvas · busca oculta · ações só com ícone</span></div>
-              <div class="bp bp--ok"><b>35/35 ✓</b><span>testes em 1440, 1200, 1024, 768, 576 e 390px</span></div>
+              <div class="bp"><b>RouterLink</b><span>links sem recarregar a aplicação</span></div>
+              <div class="bp"><b>RouterView</b><span>renderiza a página escolhida pela URL</span></div>
+              <div class="bp"><b>props: true</b><span>passa o parâmetro id para a página do aluno</span></div>
+              <div class="bp bp--ok"><b>Estado compartilhado</b><span>dados reativos persistidos no localStorage</span></div>
             </div>
           </div>
         </div>
@@ -1476,10 +1478,10 @@ body:hover .navbtn, .navbtn:focus-visible { opacity: 1; }
       <header class="slide__head reveal">
         <div>
           <p class="kicker">Slide 04 · Demonstração e conclusão</p>
-          <h2 class="headline" style="margin-top:.5rem">O framework acelera — <span class="hl">o entendimento continua sendo nosso</span>.</h2>
+          <h2 class="headline" style="margin-top:.5rem">Navegar por rotas mantém a aplicação <span class="hl">rápida e organizada</span>.</h2>
         </div>
         <p class="head-note">
-          Roteiro de 90 segundos para a demo ao vivo, seguido das
+          Demonstração das rotas e do histórico do navegador, seguida das
           vantagens, dificuldades e aprendizados do grupo.
         </p>
       </header>
@@ -1488,21 +1490,21 @@ body:hover .navbtn, .navbtn:focus-visible { opacity: 1; }
         <div class="demo-col reveal" style="--d:.08s">
           <div class="phone-wrap">
             <div class="phone">
-              <img src="../docs/mobile-menu.png" alt="Menu offcanvas aberto no celular" />
+              <img src="../docs/preview.png" alt="Visão geral do EduGestão com o menu de navegação" />
             </div>
             <p>
-              <b>Demo no celular</b>
-              Abra o menu, navegue e mostre a tabela rolando na horizontal.
-              É o mesmo componente Vue, só com o offcanvas do Bootstrap.
+              <b>Demonstração da SPA</b>
+              Navegue pelo menu e observe a URL mudar sem uma recarga completa.
+              O layout permanece enquanto o RouterView troca de página.
             </p>
           </div>
 
           <ol class="demo-steps">
-            <li><span><b>Visão geral:</b> indicadores e médias calculados por <span class="mono">computed</span>.</span></li>
-            <li><span><b>Alunos:</b> busca por matrícula, cadastro no modal e validação.</span></li>
-            <li><span><b>Notas:</b> altere uma nota e veja a média e o badge mudarem.</span></li>
-            <li><span><b>Frequência:</b> registre presença e acompanhe o percentual.</span></li>
-            <li><span><b>Responsivo:</b> reduza a janela e abra o menu offcanvas.</span></li>
+            <li><span><b>/ → /alunos:</b> navegue pelo menu sem recarregar o documento.</span></li>
+            <li><span><b>Detalhe:</b> abra um aluno e veja o parâmetro <span class="mono">:id</span> na URL.</span></li>
+            <li><span><b>/notas:</b> altere uma nota e confira a média reativa.</span></li>
+            <li><span><b>Histórico:</b> use voltar e avançar e atualize uma rota interna.</span></li>
+            <li><span><b>404:</b> acesse um caminho inexistente e volte ao início.</span></li>
           </ol>
 
           <div class="links-bar">
@@ -1520,36 +1522,36 @@ body:hover .navbtn, .navbtn:focus-visible { opacity: 1; }
           <article class="conclusion conclusion--good">
             <h3><span class="dot"></span>Vantagens</h3>
             <ul>
-              <li><b>Velocidade:</b> componentes prontos reduziram o CSS escrito à mão.</li>
-              <li><b>Consistência:</b> botões, campos e tabelas seguem o mesmo padrão.</li>
-              <li><b>Responsividade:</b> grid e utilitários resolveram os breakpoints.</li>
+              <li><b>Navegação contínua:</b> as páginas trocam sem novo carregamento do documento.</li>
+              <li><b>URLs próprias:</b> telas podem ser compartilhadas e abertas diretamente.</li>
+              <li><b>Organização:</b> cada página fica em um componente Vue separado.</li>
             </ul>
           </article>
 
           <article class="conclusion conclusion--hard">
             <h3><span class="dot"></span>Dificuldades</h3>
             <ul>
-              <li><b>Peso inicial:</b> o CSS completo é grande; foi preciso carregar só o necessário.</li>
-              <li><b>Conflitos de estilo:</b> exigiu controlar a ordem de importação e a especificidade.</li>
-              <li><b>JS do Bootstrap:</b> optamos por controlar modal e menu pelo estado do Vue.</li>
+              <li><b>Histórico do navegador:</b> a URL deve estar alinhada ao componente mostrado.</li>
+              <li><b>Hospedagem estática:</b> rotas internas precisam de um fallback para index.html.</li>
+              <li><b>Estado compartilhado:</b> os dados não podem se perder ao trocar de página.</li>
             </ul>
           </article>
 
           <article class="conclusion conclusion--learn">
             <h3><span class="dot"></span>Aprendizados</h3>
             <ul>
-              <li><b>Ler a documentação</b> vale mais que copiar classes soltas.</li>
-              <li><b>Framework não substitui CSS:</b> o tema próprio continua necessário.</li>
-              <li><b>Testar em larguras reais</b> revelou ajustes que o olho não via.</li>
+              <li><b>Rotas</b> associam caminhos a componentes.</li>
+              <li><b>RouterLink e RouterView</b> são peças centrais da navegação SPA.</li>
+              <li><b>Parâmetros dinâmicos</b> permitem reutilizar a mesma página para cada aluno.</li>
             </ul>
           </article>
 
           <article class="conclusion conclusion--next">
             <h3><span class="dot"></span>Próximos passos</h3>
             <ul>
-              <li>API com autenticação e banco de dados.</li>
-              <li>Boletim em PDF e relatório de faltas.</li>
-              <li>Testes unitários dos cálculos de média.</li>
+              <li>Adicionar autenticação e API.</li>
+              <li>Expandir relatórios de notas e frequência.</li>
+              <li>Adicionar testes automatizados para rotas e dados.</li>
             </ul>
           </article>
         </div>
@@ -1572,8 +1574,8 @@ body:hover .navbtn, .navbtn:focus-visible { opacity: 1; }
       <div class="closing-side reveal" style="--d:.18s">
         <div class="row"><span>Repositório</span><a href="https://github.com/Rocksd2/EduGest-o" target="_blank" rel="noopener">github.com/Rocksd2/EduGest-o ↗</a></div>
         <div class="row"><span>Aplicação</span><a href="https://rocksd2.github.io/EduGest-o/" target="_blank" rel="noopener">rocksd2.github.io/EduGest-o ↗</a></div>
-        <div class="row"><span>Stack</span><b>Vue 3 · Vite · Bootstrap 5</b></div>
-        <div class="row"><span>Validação</span><b>35/35 verificações</b></div>
+        <div class="row"><span>Stack</span><b>Vue 3 · Vue Router · Bootstrap 5</b></div>
+        <div class="row"><span>Rotas</span><b>8 telas e 404</b></div>
         <p class="closing-note">
           Apresentação de Front-End Frameworks · 2ª avaliação · novembro de 2026.
         </p>
