@@ -12,7 +12,7 @@ Painel responsivo de gestão acadêmica escolar para professores e coordenação
 
 ## 📊 Apresentação
 
-- **[Deck navegável](apresentacao/index.html)** — apresentação atualizada sobre Vue Router. Use `↑`/`↓` para navegar e `F` para tela cheia.
+- **[Deck navegável](https://rocksd2.github.io/EduGest-o/apresentacao/)** — apresentação atualizada sobre Vue Router. Use `↑`/`↓` para navegar e `F` para tela cheia.
 - **[Roteiro de 5 minutos](apresentacao/roteiro.md)** — conteúdo e ordem da apresentação.
 
 [![Capa da apresentação do EduGestão](docs/apresentacao.png)](apresentacao/index.html)

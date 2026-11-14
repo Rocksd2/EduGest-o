@@ -33,6 +33,12 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Publicar apresentação e capturas
+        run: |
+          mkdir -p dist/apresentacao dist/docs
+          cp apresentacao/index.html apresentacao/roteiro.md dist/apresentacao/
+          cp docs/* dist/docs/
+
       - name: Configurar fallback para rotas SPA
         run: cp dist/index.html dist/404.html
 
