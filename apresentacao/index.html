@@ -1167,6 +1167,25 @@ body:hover .navbtn, .navbtn:focus-visible { opacity: 1; }
   .slide { overflow-y: auto; }
 }
 
+@media (max-height: 620px), (max-width: 900px) {
+  .cover__side {
+    display: grid;
+    gap: .45rem;
+    padding: .75rem;
+  }
+  .cover__side > .side-label,
+  .cover__side > .side-title,
+  .cover__side > ul:not(.team-roster) {
+    display: none;
+  }
+  .cover__side .side-foot {
+    padding-top: 0;
+    border-top: 0;
+  }
+  .team-roster { gap: .22rem .6rem !important; }
+  .slide--cover { overflow-y: auto; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
