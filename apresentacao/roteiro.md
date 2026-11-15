@@ -6,6 +6,7 @@ as capturas devem ser feitas com `npm run dev` aberto.
 ## Slide 1 — Projeto e conceito de SPA
 
 - **EduGestão**: painel de gestão escolar (alunos, turmas, notas, frequência), feito com Vue 3 + Vite.
+- **Equipe:** Alexander Protasio de Brito, Iarley Couto Mesquita, Igor Carvalho Lira, Joaquim Rodrigues Conceição, Marlon Carneiro Oliveira e Moisés de Aviz Lopes.
 - Antes: uma página só, trocando telas por uma variável `paginaAtiva`.
 - Agora: cada tela tem **endereço próprio** e é um componente separado.
 - **SPA (Single Page Application)**: o navegador carrega o HTML e o JavaScript uma vez; a troca de páginas acontece no cliente, sem recarregar o documento.
@@ -36,18 +37,11 @@ const router = createRouter({
 
 **Captura sugerida:** trecho de `src/router/index.js`.
 
-## Slide 3 — Rotas implementadas
+## Slide 3 — Antes e depois: telas e navegação
 
-| Rota | Tela | Funcionalidade |
-| --- | --- | --- |
-| `/` | Visão geral | Cartões de indicadores, alunos recentes, resumo das turmas |
-| `/alunos` | Alunos | Busca por matrícula, filtro por turma, editar e remover |
-| `/alunos/:id` | Detalhes do aluno | Rota dinâmica: boletim e frequência individual |
-| `/turmas` | Turmas | Quantidade de alunos e média por sala |
-| `/notas` | Notas | Lançamento de notas (média calculada na hora) |
-| `/frequencia` | Frequência | Chamada diária por turma |
-| `/sobre` | Sobre | Explicação do projeto e atalhos para as rotas |
-| `*` | 404 | Página para endereços inexistentes |
+- **Antes:** uma tela controlada pelo estado local, sem URL própria para cada página.
+- **Depois:** Vue Router associa cada caminho a um componente e atualiza o histórico sem recarregar a aplicação.
+- **Melhorias:** links compartilháveis, navegação voltar/avançar, páginas modulares e fallback 404.
 
 - Navegação organizada no menu lateral com `RouterLink`; o item ativo recebe a classe `router-link-active`.
 - O título do cabeçalho vem de `route.meta.titulo`.
@@ -55,7 +49,7 @@ const router = createRouter({
 - Estado compartilhado em `src/dados/escola.js`: as rotas leem e alteram os mesmos alunos e registros (por isso a média muda na visão geral ao editar uma nota).
 - Rota dinâmica: `/alunos/:id` usa `props: true` para receber o `id` como prop; o link é montado com `:to="{ name: 'aluno', params: { id: aluno.id } }"`.
 
-**Capturas sugeridas:** uma por página (mínimo: visão geral, alunos, notas, detalhe do aluno e 404).
+**Capturas do slide:** `docs/antes-visao-geral.png` e `docs/preview.png` mostram a mesma visão geral antes e depois; os destaques identificam a navegação por URL e os ganhos de organização.
 
 ## Slide 4 — Demonstração e conclusão
 

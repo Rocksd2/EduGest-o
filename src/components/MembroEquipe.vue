@@ -1,15 +1,14 @@
 <script setup>
-// Componente reutilizado para cada integrante da equipe
 defineProps({
-  nome: String,
-  matricula: String,
+  nome: { type: String, required: true },
+  matricula: { type: String, required: true },
 })
 </script>
 
 <template>
   <li class="membro">
     <span class="membro__inicial" aria-hidden="true">{{ nome.charAt(0) }}</span>
-    <div>
+    <div class="membro__dados">
       <strong>{{ nome }}</strong>
       <p>Matrícula: {{ matricula }}</p>
     </div>
@@ -20,11 +19,12 @@ defineProps({
 .membro {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-  padding: 0.85rem 1rem;
-  background: var(--papel);
-  border: 1px solid var(--linha);
-  border-radius: var(--raio);
+  gap: 0.65rem;
+  min-width: 0;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #efeff4;
+  border-radius: 10px;
+  background: #fff;
   list-style: none;
 }
 
@@ -32,19 +32,33 @@ defineProps({
   flex: none;
   display: grid;
   place-items: center;
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
-  background: var(--lapis);
-  color: var(--tinta);
-  font-family: Georgia, serif;
-  font-size: 1.2rem;
+  background: #f0edff;
+  color: #6859c6;
+  font-family: Manrope, sans-serif;
+  font-size: 0.85rem;
   font-weight: 700;
+}
+
+.membro__dados {
+  display: grid;
+  min-width: 0;
+  gap: 0.1rem;
+}
+
+.membro strong {
+  overflow: hidden;
+  color: #37374b;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  text-overflow: ellipsis;
 }
 
 .membro p {
   margin: 0;
-  font-size: 0.85rem;
-  color: var(--tinta-clara);
+  color: #9696a6;
+  font-size: 0.68rem;
 }
 </style>
