@@ -12,10 +12,13 @@ Painel responsivo de gestão acadêmica escolar para professores e coordenação
 
 ## 📊 Apresentação
 
-- **[Deck navegável](https://rocksd2.github.io/EduGest-o/apresentacao/)** — apresentação atualizada sobre Vue Router. Use `↑`/`↓` para navegar e `F` para tela cheia.
+- **[Deck navegável](https://rocksd2.github.io/EduGest-o/apresentacao/)** — apresentação sobre a evolução visual do painel e a navegação SPA. Use `↑`/`↓` para navegar e `F` para tela cheia.
+- **[Baixar PDF](apresentacao/EduGestao-Bootstrap5.pdf)**.
 - **[Roteiro de 5 minutos](apresentacao/roteiro.md)** — conteúdo e ordem da apresentação.
 
 [![Capa da apresentação do EduGestão](docs/apresentacao.png)](apresentacao/index.html)
+
+[![Slide com capturas reais de antes e depois e os principais ganhos](docs/comparativo-antes-depois.png)](https://rocksd2.github.io/EduGest-o/apresentacao/#slide-3)
 
 ---
 
@@ -37,15 +40,34 @@ Painel responsivo de gestão acadêmica escolar para professores e coordenação
 | --- | --- |
 | [![Modal de cadastro de aluno](docs/modal.png)](docs/modal.png) | [![Menu de navegação do EduGestão em tela mobile](docs/mobile-menu.png)](docs/mobile-menu.png) |
 
-### Antes e depois
+### Antes e depois: evolução do projeto
 
-As capturas da primeira versão foram preservadas para comparação:
+As capturas de **Antes** mostram a versão inicial; as capturas de **Depois**
+foram atualizadas a partir da aplicação publicada. A comparação destaca a
+evolução visual com Bootstrap 5 e as melhorias de arquitetura e navegação com
+Vue Router.
 
-| Antes (1ª avaliação) | Depois (Bootstrap 5) |
+| Antes (versão inicial) | Depois (versão atual) |
 | --- | --- |
-| [![Visão geral antes do Bootstrap](docs/antes-visao-geral.png)](docs/antes-visao-geral.png) | [![Visão geral depois do Bootstrap](docs/preview.png)](docs/preview.png) |
-| [![Alunos antes do Bootstrap](docs/antes-alunos.png)](docs/antes-alunos.png) | [![Alunos depois do Bootstrap](docs/alunos.png)](docs/alunos.png) |
-| [![Notas antes do Bootstrap](docs/antes-notas.png)](docs/antes-notas.png) | [![Notas depois do Bootstrap](docs/notas.png)](docs/notas.png) |
+| [![Visão geral da versão inicial](docs/antes-visao-geral.png)](docs/antes-visao-geral.png) | [![Visão geral da versão atual](docs/preview.png)](docs/preview.png) |
+| [![Tela de alunos da versão inicial](docs/antes-alunos.png)](docs/antes-alunos.png) | [![Tela atual de alunos](docs/alunos.png)](docs/alunos.png) |
+| [![Tela de notas da versão inicial](docs/antes-notas.png)](docs/antes-notas.png) | [![Tela atual de notas](docs/notas.png)](docs/notas.png) |
+
+**Principais melhorias:** layout mais consistente e responsivo; páginas
+organizadas em componentes; URLs próprias, histórico voltar/avançar e fallback
+404. As capturas atuais de visão geral, alunos, turmas, notas e frequência
+correspondem à versão publicada.
+
+---
+
+## 👥 Equipe
+
+- Alexander Protasio de Brito
+- Iarley Couto Mesquita
+- Igor Carvalho Lira
+- Joaquim Rodrigues Conceição
+- Marlon Carneiro Oliveira
+- Moisés de Aviz Lopes
 
 ---
 
@@ -238,7 +260,7 @@ EduGest-o/
         ├── FormAluno.vue
         ├── AppFooter.vue
         ├── ListaAlunos.vue        # legado (não usado)
-        └── MembroEquipe.vue       # legado (não usado)
+        └── MembroEquipe.vue       # integrante exibido na página Sobre
 ```
 
 ---

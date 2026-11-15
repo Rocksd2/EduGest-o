@@ -39,9 +39,9 @@ const router = createRouter({
 
 ## Slide 3 — Antes e depois: telas e navegação
 
-- **Antes:** uma tela controlada pelo estado local, sem URL própria para cada página.
-- **Depois:** Vue Router associa cada caminho a um componente e atualiza o histórico sem recarregar a aplicação.
-- **Melhorias:** links compartilháveis, navegação voltar/avançar, páginas modulares e fallback 404.
+- **Antes:** versão inicial do painel, sem Bootstrap 5 e sem URL própria para cada página.
+- **Depois:** interface responsiva com Bootstrap 5; Vue Router associa caminhos a componentes e mantém o histórico sem recarregar a aplicação.
+- **Melhorias:** visual consistente, páginas modulares, links compartilháveis, navegação voltar/avançar e fallback 404.
 
 - Navegação organizada no menu lateral com `RouterLink`; o item ativo recebe a classe `router-link-active`.
 - O título do cabeçalho vem de `route.meta.titulo`.
@@ -49,7 +49,7 @@ const router = createRouter({
 - Estado compartilhado em `src/dados/escola.js`: as rotas leem e alteram os mesmos alunos e registros (por isso a média muda na visão geral ao editar uma nota).
 - Rota dinâmica: `/alunos/:id` usa `props: true` para receber o `id` como prop; o link é montado com `:to="{ name: 'aluno', params: { id: aluno.id } }"`.
 
-**Capturas do slide:** `docs/antes-visao-geral.png` e `docs/preview.png` mostram a mesma visão geral antes e depois; os destaques identificam a navegação por URL e os ganhos de organização.
+**Capturas do slide:** `docs/antes-visao-geral.png` mostra a versão inicial; `docs/preview.png` é uma captura atualizada da aplicação publicada. As imagens comparam a evolução visual e a navegação.
 
 ## Slide 4 — Demonstração e conclusão
 
