@@ -21,6 +21,7 @@ const paginas = [
   { rota: 'turmas', nome: 'Turmas', icone: 'bi-diagram-3' },
   { rota: 'notas', nome: 'Notas', icone: 'bi-clipboard-data' },
   { rota: 'frequencia', nome: 'Frequência', icone: 'bi-check2-square' },
+  { rota: 'integracao', nome: 'API', icone: 'bi-cloud-arrow-down' },
   { rota: 'sobre', nome: 'Sobre', icone: 'bi-info-circle' },
 ]
 

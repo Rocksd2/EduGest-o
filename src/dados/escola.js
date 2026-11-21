@@ -179,6 +179,20 @@ export function abrirCadastro(aluno = null) {
   modalAberto.value = true
 }
 
+// Usado pelo cadastro manual e pela importação da API: a mesma regra de matrícula única.
+export function adicionarAluno(dados) {
+  const id = Math.max(0, ...alunos.value.map((aluno) => aluno.id)) + 1
+  const matriculasUsadas = new Set(alunos.value.map((aluno) => aluno.matricula))
+  const aluno = {
+    id,
+    matricula: gerarMatricula(matriculasUsadas),
+    ...dados,
+    notas: { portugues: 0, matematica: 0, ciencias: 0 },
+  }
+  alunos.value.push(aluno)
+  return aluno
+}
+
 export function salvarAluno() {
   const nome = formulario.value.nome.trim()
   if (nome.length < 3 || !formulario.value.turma) {
@@ -188,15 +202,7 @@ export function salvarAluno() {
   if (alunoEditando.value) {
     Object.assign(alunoEditando.value, { ...formulario.value, nome })
   } else {
-    const id = Math.max(0, ...alunos.value.map((aluno) => aluno.id)) + 1
-    const matriculasUsadas = new Set(alunos.value.map((aluno) => aluno.matricula))
-    alunos.value.push({
-      id,
-      matricula: gerarMatricula(matriculasUsadas),
-      ...formulario.value,
-      nome,
-      notas: { portugues: 0, matematica: 0, ciencias: 0 },
-    })
+    adicionarAluno({ ...formulario.value, nome })
   }
   modalAberto.value = false
 }

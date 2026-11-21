@@ -9,6 +9,7 @@ const rotas = [
   { caminho: '/turmas', nome: 'Turmas', descricao: 'Quantidade de alunos e média de cada sala.' },
   { caminho: '/notas', nome: 'Notas', descricao: 'Lançamento das notas por disciplina.' },
   { caminho: '/frequencia', nome: 'Frequência', descricao: 'Chamada diária por turma.' },
+  { caminho: '/integracao', nome: 'Integração com API', descricao: 'Busca de usuários na DummyJSON e importação para o cadastro.' },
 ]
 
 const membros = [
@@ -37,6 +38,7 @@ const membros = [
         <div class="sobre-texto">
           <p>O EduGestão organiza <strong>alunos, turmas, notas e frequência</strong> de uma escola fictícia. Os dados ficam salvos no <code>localStorage</code> do navegador, então continuam disponíveis depois de recarregar a página.</p>
           <p>Nesta etapa o projeto ganhou <strong>Vue Router</strong>: cada tela virou um componente próprio em <code>src/views</code> e a navegação acontece por rotas, sem recarregar a aplicação.</p>
+          <p>Também ganhou integração com a <strong>API pública DummyJSON</strong>: a tela <RouterLink to="/integracao">Integração com API</RouterLink> faz requisições <code>GET</code> com <code>fetch()</code>, mostra o JSON recebido e permite importar pessoas para o cadastro local.</p>
           <p>Funcionalidades mantidas: cadastro com matrícula única de seis dígitos, busca por matrícula, filtro por turma, lançamento de notas das disciplinas {{ disciplinas.map((d) => d.nome).join(', ') }}, chamada diária e as {{ turmas.length }} turmas.</p>
         </div>
       </section>

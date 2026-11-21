@@ -6,12 +6,14 @@ Painel responsivo de gestão acadêmica escolar para professores e coordenação
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap_5-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 [![Status](https://img.shields.io/badge/status-SPA%20com%20Vue%20Router-yellow?style=for-the-badge)](#-navegação-spa-com-vue-router)
+[![API](https://img.shields.io/badge/API-DummyJSON-2ea44f?style=for-the-badge)](#-integração-com-api)
 [![Persistência](https://img.shields.io/badge/persistência-localStorage-4B5563?style=for-the-badge)](#-limitações-conhecidas)
 
 ---
 
 ## 📊 Apresentação
 
+- **[Apresentação final — 5 slides](docs/apresentacao-final.md)** — pitch, demonstração, defesa técnica da integração com API e evolução do projeto. Formato Marp, exportável para PDF/PPTX.
 - **[Deck navegável](https://rocksd2.github.io/EduGest-o/apresentacao/)** — apresentação sobre a evolução visual do painel e a navegação SPA. Use `↑`/`↓` para navegar e `F` para tela cheia.
 - **[Baixar PDF](apresentacao/EduGestao-Bootstrap5.pdf)**.
 - **[Roteiro de 5 minutos](apresentacao/roteiro.md)** — conteúdo e ordem da apresentação.
@@ -75,7 +77,7 @@ correspondem à versão publicada.
 
 Sistema criado a partir de uma necessidade real de sala de aula: professores e coordenadores precisam consultar e editar notas e informações dos alunos de forma simples. O EduGestão reúne essas tarefas em um painel único, com navegação por telas e indicadores calculados automaticamente.
 
-É um **protótipo de interface**: funciona no navegador, sem API ou banco de dados. O Bootstrap 5 continua instalado como framework CSS, com Bootstrap Icons, enquanto as páginas mantêm o tema próprio do EduGestão.
+É um protótipo funcional que agora também consome a **API pública DummyJSON** na tela de integração. Não há back-end próprio nem banco de dados: os cadastros continuam no `localStorage` do navegador. O Bootstrap 5 segue como framework CSS, com Bootstrap Icons, enquanto as páginas mantêm o tema próprio do EduGestão.
 
 ---
 
@@ -108,11 +110,30 @@ Sistema criado a partir de uma necessidade real de sala de aula: professores e c
 - Chamada diária com registro de presença ou ausência por aluno.
 - Selos de status para presença, ausência e pendências.
 
+**Integração com API**
+
+- Busca de usuários na API pública DummyJSON com `fetch()` e requisições `GET`.
+- Exibição do JSON recebido em cartões reativos, com estados de carregamento e erro.
+- Importação de usuários para o cadastro da escola, com matrícula gerada e proteção contra duplicata.
+
 **Geral**
 
 - Persistência local dos cadastros, notas e registros de frequência no navegador.
 - Layout responsivo (desktop, tablet e celular), com menu horizontal no mobile.
 - Navegação SPA com Vue Router, URLs próprias, histórico do navegador e fallback 404.
+
+## 🔌 Integração com API
+
+| Item | Valor |
+| --- | --- |
+| API | DummyJSON (pública, gratuita, sem chave) |
+| Endereço | `https://dummyjson.com` |
+| Endpoint inicial | `GET https://dummyjson.com/users?limit=8` |
+| Endpoint da busca | `GET https://dummyjson.com/users/search?q=<nome>&limit=8` |
+| Formato | JSON (`{ users: [...], total, skip, limit }`) |
+| Cliente | `fetch()` nativo em `src/dados/api.js` |
+
+A tela `/integracao` carrega usuários ao abrir (`onMounted`) e refaz a busca com o nome digitado. `ref()` guarda resultados, carregamento e erro; `v-for` desenha os cartões; `v-if` mostra cada estado. O componente `CartaoUsuarioApi` emite o evento `importar` e a página chama `adicionarAluno()`, reaproveitando a regra de matrícula única. Falhas de rede ou respostas inválidas exibem um alerta com botão **Tentar novamente**.
 
 ## 🧭 Navegação SPA com Vue Router
 
@@ -130,12 +151,14 @@ alunos, notas e frequência ao navegar entre páginas.
 | `/notas` | Lançamento de notas |
 | `/frequencia` | Chamada diária |
 | `/sobre` | Sobre o projeto e a navegação SPA |
+| `/integracao` | Busca na DummyJSON e importação de alunos |
 | Demais caminhos | Página 404 |
 
-O roteiro atualizado dos quatro slides da atividade está em
-[docs/apresentacao.md](docs/apresentacao.md). A demonstração pode ser feita
-localmente com `npm run dev`, incluindo a navegação entre rotas, a URL dinâmica
-de um aluno e a página 404.
+O roteiro dos quatro slides da etapa de rotas está em
+[docs/apresentacao.md](docs/apresentacao.md); o roteiro da **entrega final (5 slides)**
+está em [docs/apresentacao-final.md](docs/apresentacao-final.md). A demonstração
+pode ser feita localmente com `npm run dev`, incluindo a navegação entre rotas,
+a URL dinâmica de um aluno, a página 404 e a consulta à API.
 
 ---
 
@@ -179,7 +202,11 @@ sem inicializar um segundo framework JavaScript.
 - `src/router/index.js` associa cada URL ao componente da página e configura o
   histórico, o título e a página 404.
 - `src/views/` contém as páginas da visão geral, alunos, detalhes do aluno,
-  turmas, notas, frequência, sobre e 404.
+  turmas, notas, frequência, integração com API, sobre e 404.
+- `src/views/IntegracaoView.vue` controla a busca, os estados da requisição e a
+  importação; `src/components/CartaoUsuarioApi.vue` exibe cada usuário via props
+  e emite o evento `importar` (comunicação entre componentes).
+- `src/dados/api.js` concentra as requisições HTTP à DummyJSON.
 - `src/dados/escola.js` centraliza os dados reativos, as regras de negócio e a
   persistência no `localStorage`, compartilhados por todas as rotas.
 - `src/components/` preserva os componentes Vue da etapa anterior; os que não
@@ -238,7 +265,8 @@ npm run preview   # serve a build localmente
 EduGest-o/
 ├── .github/workflows/deploy.yml   # publicação automática no GitHub Pages
 ├── apresentacao/                  # slides (HTML navegável, PDF e roteiro)
-├── docs/                          # capturas de tela (antes e depois)
+├── docs/                          # capturas, roteiros e apresentação final
+│   └── apresentacao-final.md      # 5 slides da entrega final (Marp)
 ├── public/
 │   └── favicon.svg
 ├── index.html                     # ponto de entrada + fontes
@@ -248,13 +276,15 @@ EduGest-o/
     ├── App.vue                    # layout compartilhado, modal e RouterView
     ├── main.js                    # Bootstrap + Vue + Vue Router
     ├── router/index.js            # rotas SPA
+    ├── dados/api.js               # requisições GET à DummyJSON
     ├── dados/escola.js            # estado e regras compartilhados
-    ├── views/                     # páginas por rota
+    ├── views/                     # páginas por rota (inclui IntegracaoView.vue)
     ├── assets/
     │   └── main.css               # identidade visual do EduGestão
     └── components/
         ├── AppSidebar.vue
         ├── AppHeader.vue
+        ├── CartaoUsuarioApi.vue   # cartão da API (props + emit)
         ├── ResumoCard.vue
         ├── StatusBadge.vue
         ├── FormAluno.vue
@@ -291,6 +321,9 @@ diretamente ou atualizados. Fora do Actions, o app usa `/` como base local.
   exibição com `RouterView`, rota dinâmica e página 404.
 - **SPA em hospedagem estática**: configuração de base para GitHub Pages e
   fallback de navegação direta para rotas internas.
+- **Integração Front-End × Back-End**: `fetch()`, JSON, estados de carregamento
+  e erro, `v-for`/`v-if` para exibir dados externos e evento customizado entre
+  componentes.
 - **Framework CSS**: Bootstrap 5 e Bootstrap Icons instalados por npm, com
   utilitário `table-responsive`; estilos específicos preservam o tema do painel.
 - **Responsividade**: breakpoints do CSS do projeto para o layout do painel.
@@ -300,7 +333,7 @@ diretamente ou atualizados. Fora do Actions, o app usa `/` como base local.
 
 ## ⚠️ Limitações conhecidas
 
-- **Sem back-end**: não há API, autenticação ou banco de dados. Os dados ficam no `localStorage` do navegador e **não são compartilhados** entre dispositivos ou usuários.
+- **Sem back-end próprio**: a API integrada é pública e de terceiros (DummyJSON); não há autenticação nem banco de dados. Os cadastros ficam no `localStorage` do navegador e **não são compartilhados** entre dispositivos ou usuários. A tela de integração depende de conexão com a internet.
 - **Dados de demonstração**: a lista inicial é composta por alunos fictícios.
 - **Sem controle de acesso**: qualquer pessoa com acesso ao navegador vê e edita tudo.
 - **Sem histórico consolidado**: a chamada é registrada por dia, mas não há relatório de faltas por período.
@@ -311,6 +344,7 @@ Para uso real por uma escola, seria necessário integrar autenticação, servido
 
 ## 🛣️ Próximos passos
 
+- Evoluir a integração com `POST`, `PUT` e `DELETE` em uma API própria.
 - Criar API com autenticação de professor e coordenação.
 - Migrar os dados do `localStorage` para banco de dados.
 - Adicionar relatório de faltas e boletim por bimestre.

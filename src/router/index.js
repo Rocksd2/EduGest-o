@@ -6,6 +6,7 @@ import TurmasView from '../views/TurmasView.vue'
 import NotasView from '../views/NotasView.vue'
 import FrequenciaView from '../views/FrequenciaView.vue'
 import SobreView from '../views/SobreView.vue'
+import IntegracaoView from '../views/IntegracaoView.vue'
 import NaoEncontradaView from '../views/NaoEncontradaView.vue'
 
 const rotas = [
@@ -17,6 +18,7 @@ const rotas = [
   { path: '/notas', name: 'notas', component: NotasView, meta: { titulo: 'Notas' } },
   { path: '/frequencia', name: 'frequencia', component: FrequenciaView, meta: { titulo: 'Frequência' } },
   { path: '/sobre', name: 'sobre', component: SobreView, meta: { titulo: 'Sobre o projeto' } },
+  { path: '/integracao', name: 'integracao', component: IntegracaoView, meta: { titulo: 'Integração com API' } },
   { path: '/:pathMatch(.*)*', name: 'nao-encontrada', component: NaoEncontradaView, meta: { titulo: 'Página não encontrada' } },
 ]
 
