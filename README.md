@@ -42,6 +42,10 @@ Painel responsivo de gestão acadêmica escolar para professores e coordenação
 | --- | --- |
 | [![Modal de cadastro de aluno](docs/modal.png)](docs/modal.png) | [![Menu de navegação do EduGestão em tela mobile](docs/mobile-menu.png)](docs/mobile-menu.png) |
 
+**Integração com API** — usuários vindos da DummyJSON, busca por nome e importação para o cadastro.
+
+[![Tela de integração com a API DummyJSON exibindo cartões de usuários](docs/integracao.png)](docs/integracao.png)
+
 ### Antes e depois: evolução do projeto
 
 As capturas de **Antes** mostram a versão inicial; as capturas de **Depois**
@@ -57,8 +61,8 @@ Vue Router.
 
 **Principais melhorias:** layout mais consistente e responsivo; páginas
 organizadas em componentes; URLs próprias, histórico voltar/avançar e fallback
-404. As capturas atuais de visão geral, alunos, turmas, notas e frequência
-correspondem à versão publicada.
+404; integração com a API DummyJSON. As capturas atuais foram refeitas a partir
+da versão publicada, incluindo a tela de integração.
 
 ---
 
